@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@/components/ThemeProvider";
+import ThemeProvider from "@/components/ThemeProvider";
 import { cn } from "@/lib/utils";
 import { settings } from "@/settings";
 import type { Metadata } from "next";

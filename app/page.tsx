@@ -1,3 +1,4 @@
+import PatientForm from "@/components/PatientForm";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,10 +16,10 @@ const HomePage = () => {
               width={1000}
               height={1000}
             />
-            <h3 className="text-xl font-semibold tracking-tight">True Care</h3>
+            <h3 className="text-2xl font-semibold tracking-tight">True Care</h3>
           </div>
 
-          {/* TODO: Forms */}
+          <PatientForm />
 
           <div className="flex items-center justify-between text-sm">
             <span>{new Date().getFullYear()} &copy; All Rights Reserved</span>

@@ -10,7 +10,7 @@ import {
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
-export function ModeToggle() {
+const ModeToggle = () => {
   const { setTheme } = useTheme();
 
   return (
@@ -35,4 +35,6 @@ export function ModeToggle() {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};
+
+export default ModeToggle;
