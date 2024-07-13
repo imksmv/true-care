@@ -32,7 +32,7 @@ const HomePage = () => {
         </div>
 
         <div className="relative hidden h-full w-full lg:block">
-          <div className="absolute left-0 top-0 h-full w-full bg-gradient-to-tr from-primary/15 to-primary/25" />
+          <div className="absolute left-0 top-0 h-full w-full bg-gradient-to-tr from-primary/5 to-primary/15" />
           <Image
             priority
             className="h-full w-full object-cover"
