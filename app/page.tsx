@@ -13,8 +13,8 @@ const HomePage = () => {
               className="h-8 w-8"
               src="/logo.png"
               alt="Logo"
-              width={1000}
-              height={1000}
+              width={100}
+              height={100}
             />
             <h3 className="text-2xl font-semibold tracking-tight">True Care</h3>
           </div>
