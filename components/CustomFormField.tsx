@@ -15,7 +15,7 @@ interface Props {
   formFieldType: FormFieldType;
   name: string;
   label?: string;
-  palceholder?: string;
+  placeholder?: string;
   icon?: React.ReactNode;
   disabled?: boolean;
   dateFormat?: string;
@@ -25,7 +25,7 @@ interface Props {
 }
 
 const CustomFormField = (props: Props) => {
-  const { control, formFieldType, name, label } = props;
+  const { control, formFieldType, icon, name, label } = props;
 
   return (
     <FormField
@@ -34,7 +34,9 @@ const CustomFormField = (props: Props) => {
       render={({ field }) => (
         <FormItem>
           {formFieldType !== FormFieldType.CHECKBOX && label && (
-            <FormLabel>{label}</FormLabel>
+            <div className="flex items-center gap-2">
+              {icon} <FormLabel>{label}</FormLabel>
+            </div>
           )}
 
           <RenderField field={field} props={props} />
@@ -47,26 +49,18 @@ const CustomFormField = (props: Props) => {
 };
 
 const RenderField = ({ field, props }: { field: any; props: Props }) => {
-  const { formFieldType, icon, palceholder } = props;
+  const { formFieldType, placeholder } = props;
 
   switch (formFieldType) {
     case FormFieldType.INPUT:
       return (
-        <div>
-          {icon && (
-            <div className="flex items-center gap-2">
-              {icon}
-              <FormControl>
-                <Input placeholder={palceholder} {...field} />
-              </FormControl>
-            </div>
-          )}
-        </div>
+        <FormControl>
+          <Input placeholder={placeholder} {...field} />
+        </FormControl>
       );
-      break;
 
     default:
-      break;
+      return null;
   }
 };
 

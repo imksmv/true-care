@@ -53,8 +53,8 @@ const PatientForm = () => {
         <CustomFormField
           name="name"
           label="Full Name"
-          palceholder="John Doe"
-          icon={<User />}
+          placeholder="John Doe"
+          icon={<User size={16} />}
           control={form.control}
           formFieldType={FormFieldType.INPUT}
         />
@@ -62,8 +62,8 @@ const PatientForm = () => {
         <CustomFormField
           name="email"
           label="Email"
-          palceholder="johndoe@example.com"
-          icon={<Mail />}
+          placeholder="johndoe@example.com"
+          icon={<Mail size={16} />}
           control={form.control}
           formFieldType={FormFieldType.INPUT}
         />
