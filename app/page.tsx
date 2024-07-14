@@ -26,7 +26,7 @@ const HomePage = () => {
 
             <Button asChild variant="link">
               <Link className="" href="/?admin=true">
-                Control Panel Access
+                Control Panel
               </Link>
             </Button>
           </div>

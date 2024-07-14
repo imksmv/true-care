@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import CustomFormField from "./CustomFormField";
-import { User, Mail } from "lucide-react";
+import { User, Mail, Phone } from "lucide-react";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -23,6 +23,9 @@ const formSchema = z.object({
     message: "Username must be at least 2 characters.",
   }),
   email: z.string().email({ message: "Invalid email address" }),
+  phone: z
+    .string()
+    .min(10, { message: "Phone number must be at least 10 digits" }),
 });
 
 const PatientForm = () => {
@@ -31,6 +34,7 @@ const PatientForm = () => {
     defaultValues: {
       name: "",
       email: "",
+      phone: "",
     },
   });
 
@@ -66,6 +70,14 @@ const PatientForm = () => {
           icon={<Mail size={16} />}
           control={form.control}
           formFieldType={FormFieldType.INPUT}
+        />
+
+        <CustomFormField
+          name="phone"
+          label="Phone Number"
+          icon={<Phone size={16} />}
+          control={form.control}
+          formFieldType={FormFieldType.PHONE_INPUT}
         />
 
         <Button type="submit">Submit</Button>

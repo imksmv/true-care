@@ -7,7 +7,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { E164Number } from "libphonenumber-js";
 import { Control } from "react-hook-form";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 import { FormFieldType } from "./PatientForm";
 
 interface Props {
@@ -56,6 +59,19 @@ const RenderField = ({ field, props }: { field: any; props: Props }) => {
       return (
         <FormControl>
           <Input placeholder={placeholder} {...field} />
+        </FormControl>
+      );
+
+    case FormFieldType.PHONE_INPUT:
+      return (
+        <FormControl>
+          <PhoneInput
+            defaultCountry="GB"
+            international
+            withCountryCallingCode
+            value={field.value as E164Number | undefined}
+            onChange={field.onChange}
+          />
         </FormControl>
       );
 
