@@ -7,9 +7,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Control, Form } from "react-hook-form";
+import { Control } from "react-hook-form";
 import { FormFieldType } from "./PatientForm";
-import Image from "next/image";
 
 interface Props {
   control: Control<any>;
@@ -17,8 +16,7 @@ interface Props {
   name: string;
   label?: string;
   palceholder?: string;
-  iconSrc?: string;
-  iconAlt?: string;
+  icon?: React.ReactNode;
   disabled?: boolean;
   dateFormat?: string;
   showTimeSelect?: boolean;
@@ -49,24 +47,20 @@ const CustomFormField = (props: Props) => {
 };
 
 const RenderField = ({ field, props }: { field: any; props: Props }) => {
-  const { formFieldType, iconSrc, iconAlt, palceholder } = props;
+  const { formFieldType, icon, palceholder } = props;
 
   switch (formFieldType) {
     case FormFieldType.INPUT:
       return (
         <div>
-          {iconSrc && (
-            <Image
-              src={iconSrc}
-              alt={iconAlt || "Icon"}
-              width={24}
-              height={24}
-              className="ml-2"
-            />
+          {icon && (
+            <div className="flex items-center gap-2">
+              {icon}
+              <FormControl>
+                <Input placeholder={palceholder} {...field} />
+              </FormControl>
+            </div>
           )}
-          <FormControl>
-            <Input placeholder={palceholder} {...field} />
-          </FormControl>
         </div>
       );
       break;
