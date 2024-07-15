@@ -6,9 +6,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Mail, Phone, User } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 import CustomFormField from "./CustomFormField";
 import SubmitButton from "./SubmitButton";
+import router from "next/navigation";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -32,10 +34,22 @@ const PatientForm = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof UserFormValidation>) {
+  const onSubmit = async ({
+    name,
+    email,
+    phone,
+  }: z.infer<typeof UserFormValidation>) => {
     setIsLoading(true);
-    console.log(values);
-  }
+
+    try {
+      // const userData = { name, email, phone };
+      // const user await createUser(userData);
+      // if(user) router.push(`/patient/${user.$id}/register`);
+      // TODO: Add success toast
+    } catch (error) {
+      toast.error("An error occurred while submitting the form.");
+    }
+  };
 
   return (
     <Form {...form}>

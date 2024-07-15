@@ -4,6 +4,7 @@ import { settings } from "@/settings";
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import "/styles/globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -35,7 +36,8 @@ const RootLayout = ({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <main>{children}</main>
+          <Toaster richColors />
         </ThemeProvider>
       </body>
     </html>
