@@ -12,6 +12,7 @@ import CustomFormField from "./CustomFormField";
 import SubmitButton from "./SubmitButton";
 import { useRouter } from "next/navigation";
 import { createUser } from "@/lib/actions/patient.actions";
+import ModeToggle from "./ThemeToggle";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -61,13 +62,18 @@ const PatientForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="my-4 space-y-6">
-        <div>
-          <h2 className="text-3xl font-semibold tracking-tight">
-            Welcome back! 👋
-          </h2>
-          <p className="text-sm text-muted-foreground">
-            Schedule your appointment.
-          </p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-3xl font-semibold tracking-tight">
+              Welcome back! 👋
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              Schedule your appointment.
+            </p>
+          </div>
+          <div>
+            <ModeToggle />
+          </div>
         </div>
 
         <CustomFormField

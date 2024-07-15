@@ -37,7 +37,7 @@ const RootLayout = ({
           disableTransitionOnChange
         >
           <main>{children}</main>
-          <Toaster richColors />
+          <Toaster position="top-center" richColors />
         </ThemeProvider>
       </body>
     </html>
