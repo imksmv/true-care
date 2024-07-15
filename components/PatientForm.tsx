@@ -10,7 +10,8 @@ import { toast } from "sonner";
 import { z } from "zod";
 import CustomFormField from "./CustomFormField";
 import SubmitButton from "./SubmitButton";
-import router from "next/navigation";
+import { useRouter } from "next/navigation";
+import { createUser } from "@/lib/actions/patient.actions";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -24,6 +25,7 @@ export enum FormFieldType {
 
 const PatientForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof UserFormValidation>>({
     resolver: zodResolver(UserFormValidation),
@@ -34,23 +36,28 @@ const PatientForm = () => {
     },
   });
 
-  const onSubmit = async ({
-    name,
-    email,
-    phone,
-  }: z.infer<typeof UserFormValidation>) => {
+  const onSubmit = async (values: z.infer<typeof UserFormValidation>) => {
     setIsLoading(true);
 
     try {
-      // const userData = { name, email, phone };
-      // const user await createUser(userData);
-      // if(user) router.push(`/patient/${user.$id}/register`);
-      // TODO: Add success toast
+      const user = {
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
+      };
+
+      const newUser = await createUser(user);
+
+      if (newUser) {
+        router.push(`/patients/${newUser.$id}/register`);
+        toast.success("User created successfully.");
+      }
     } catch (error) {
       toast.error("An error occurred while submitting the form.");
     }
-  };
 
+    setIsLoading(false);
+  };
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="my-4 space-y-6">
@@ -90,7 +97,7 @@ const PatientForm = () => {
         />
 
         <SubmitButton className="w-full" isLoading={isLoading}>
-          Submit
+          Get Started
         </SubmitButton>
       </form>
     </Form>
