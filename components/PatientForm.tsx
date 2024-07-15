@@ -1,12 +1,14 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
+import { UserFormValidation } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Mail, Phone, User } from "lucide-react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import CustomFormField from "./CustomFormField";
-import { User, Mail, Phone } from "lucide-react";
+import SubmitButton from "./SubmitButton";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -18,19 +20,11 @@ export enum FormFieldType {
   SCELETON = "skeleton",
 }
 
-const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  email: z.string().email({ message: "Invalid email address" }),
-  phone: z
-    .string()
-    .min(10, { message: "Phone number must be at least 10 digits" }),
-});
-
 const PatientForm = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const form = useForm<z.infer<typeof UserFormValidation>>({
+    resolver: zodResolver(UserFormValidation),
     defaultValues: {
       name: "",
       email: "",
@@ -38,7 +32,8 @@ const PatientForm = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof UserFormValidation>) {
+    setIsLoading(true);
     console.log(values);
   }
 
@@ -80,7 +75,9 @@ const PatientForm = () => {
           formFieldType={FormFieldType.PHONE_INPUT}
         />
 
-        <Button type="submit">Submit</Button>
+        <SubmitButton className="w-full" isLoading={isLoading}>
+          Submit
+        </SubmitButton>
       </form>
     </Form>
   );
