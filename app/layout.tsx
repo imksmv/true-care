@@ -1,10 +1,10 @@
 import ThemeProvider from "@/components/ThemeProvider";
+import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import { settings } from "@/settings";
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import "/styles/globals.css";
-import { Toaster } from "@/components/ui/sonner";
 
 const fontSans = FontSans({
   subsets: ["latin"],

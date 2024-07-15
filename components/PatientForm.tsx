@@ -1,17 +1,17 @@
 "use client";
 
 import { Form } from "@/components/ui/form";
+import { createUser } from "@/lib/actions/patient.actions";
 import { UserFormValidation } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Mail, Phone, User } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import CustomFormField from "./CustomFormField";
 import SubmitButton from "./SubmitButton";
-import { useRouter } from "next/navigation";
-import { createUser } from "@/lib/actions/patient.actions";
 import ModeToggle from "./ThemeToggle";
 
 export enum FormFieldType {
@@ -51,7 +51,6 @@ const PatientForm = () => {
 
       if (newUser) {
         router.push(`/patients/${newUser.$id}/register`);
-        toast.success("User created successfully.");
       }
     } catch (error) {
       toast.error("An error occurred while submitting the form.");
@@ -64,9 +63,14 @@ const PatientForm = () => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="my-4 space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-3xl font-semibold tracking-tight">
-              Welcome back! 👋
-            </h2>
+            <div className="flex items-center gap-2">
+              <h2 className="text-3xl font-semibold tracking-tight">
+                Welcome, friend!
+              </h2>
+              <div className="animate-wave origin-bottom-right text-3xl">
+                👋
+              </div>
+            </div>
             <p className="text-sm text-muted-foreground">
               Schedule your appointment.
             </p>
@@ -102,7 +106,7 @@ const PatientForm = () => {
           formFieldType={FormFieldType.PHONE_INPUT}
         />
 
-        <SubmitButton className="w-full" isLoading={isLoading}>
+        <SubmitButton className="w-full font-bold" isLoading={isLoading}>
           Get Started
         </SubmitButton>
       </form>
