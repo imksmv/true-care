@@ -1,9 +1,13 @@
-import PatientForm from "@/components/PatientForm";
+import RegisterForm from "@/components/RegisterForm";
 import { Button } from "@/components/ui/button";
+import { getUser } from "@/lib/actions/patient.actions";
+import { SearchParamProps } from "@/types/index.types";
 import Image from "next/image";
 import Link from "next/link";
 
-const HomePage = () => {
+const RegisterPage = async ({ params: { userId } }: SearchParamProps) => {
+  const user = await getUser(userId);
+
   return (
     <section>
       <div className="grid h-screen grid-cols-1 lg:grid-cols-2">
@@ -19,7 +23,7 @@ const HomePage = () => {
             <h3 className="text-2xl font-semibold tracking-tight">True Care</h3>
           </div>
 
-          <PatientForm />
+          <RegisterForm user={user} />
 
           <div className="flex items-center justify-between text-sm">
             <span>{new Date().getFullYear()} &copy; All Rights Reserved</span>
@@ -37,7 +41,7 @@ const HomePage = () => {
           <Image
             priority
             className="h-full w-full object-cover"
-            src="/onboarding.webp"
+            src="/register.webp"
             alt="Hero"
             width={1000}
             height={1000}
@@ -48,4 +52,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default RegisterPage;

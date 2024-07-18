@@ -4,27 +4,19 @@ import { Form } from "@/components/ui/form";
 import { createUser } from "@/lib/actions/patient.actions";
 import { UserFormValidation } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Mail, Phone, User } from "lucide-react";
+import { Mail, Phone, User as UserIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import CustomFormField from "./CustomFormField";
+import { FormFieldType } from "./PatientForm";
 import SubmitButton from "./SubmitButton";
 import ModeToggle from "./ThemeToggle";
+import { User } from "@/types/index.types";
 
-export enum FormFieldType {
-  INPUT = "input",
-  TEXTAREA = "textarea",
-  PHONE_INPUT = "phone_input",
-  CHECKBOX = "checkbox",
-  DATE_PICKER = "date_picker",
-  SELECT = "select",
-  SCELETON = "skeleton",
-}
-
-const PatientForm = () => {
+const RegisterForm = ({ user }: { user: User }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
 
@@ -84,26 +76,9 @@ const PatientForm = () => {
           name="name"
           label="Full Name"
           placeholder="John Doe"
-          icon={<User size={16} />}
+          icon={<UserIcon size={16} />}
           control={form.control}
           formFieldType={FormFieldType.INPUT}
-        />
-
-        <CustomFormField
-          name="email"
-          label="Email"
-          placeholder="johndoe@example.com"
-          icon={<Mail size={16} />}
-          control={form.control}
-          formFieldType={FormFieldType.INPUT}
-        />
-
-        <CustomFormField
-          name="phone"
-          label="Phone Number"
-          icon={<Phone size={16} />}
-          control={form.control}
-          formFieldType={FormFieldType.PHONE_INPUT}
         />
 
         <SubmitButton className="w-full font-bold" isLoading={isLoading}>
@@ -114,4 +89,4 @@ const PatientForm = () => {
   );
 };
 
-export default PatientForm;
+export default RegisterForm;
