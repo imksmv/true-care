@@ -53,24 +53,22 @@ const RegisterForm = ({ user }: { user: User }) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="my-4 space-y-6">
-        <div className="flex items-center justify-between">
+        <section className="flex items-center justify-between">
           <div>
-            <div className="flex items-center gap-2">
-              <h2 className="text-3xl font-semibold tracking-tight">
-                Welcome, friend!
-              </h2>
-              <div className="origin-bottom-right animate-wave text-3xl">
-                👋
-              </div>
-            </div>
+            <h1 className="text-3xl font-semibold tracking-tight">
+              Welcome, {user.name}!
+            </h1>
             <p className="text-sm text-muted-foreground">
-              Schedule your appointment.
+              Let us know more about yourself and your medical history.
             </p>
           </div>
-          <div>
-            <ModeToggle />
-          </div>
-        </div>
+
+          <ModeToggle />
+        </section>
+
+        <h2 className="border-b pb-2 text-2xl font-semibold tracking-tight">
+          Personal Details
+        </h2>
 
         <CustomFormField
           name="name"
@@ -80,6 +78,25 @@ const RegisterForm = ({ user }: { user: User }) => {
           control={form.control}
           formFieldType={FormFieldType.INPUT}
         />
+
+        <div className="flex flex-col gap-6 lg:flex-row">
+          <CustomFormField
+            name="email"
+            label="Email"
+            placeholder="johndoe@example.com"
+            icon={<Mail size={16} />}
+            control={form.control}
+            formFieldType={FormFieldType.INPUT}
+          />
+
+          <CustomFormField
+            name="phone"
+            label="Phone Number"
+            icon={<Phone size={16} />}
+            control={form.control}
+            formFieldType={FormFieldType.PHONE_INPUT}
+          />
+        </div>
 
         <SubmitButton className="w-full font-bold" isLoading={isLoading}>
           Get Started

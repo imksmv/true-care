@@ -62,11 +62,11 @@ const PatientForm = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="my-4 space-y-6">
         <div className="flex items-center justify-between">
-          <div>
+          <section>
             <div className="flex items-center gap-2">
-              <h2 className="text-3xl font-semibold tracking-tight">
-                Welcome, friend!
-              </h2>
+              <h1 className="text-3xl font-semibold tracking-tight">
+                Greetings, friend!
+              </h1>
               <div className="origin-bottom-right animate-wave text-3xl">
                 👋
               </div>
@@ -74,10 +74,9 @@ const PatientForm = () => {
             <p className="text-sm text-muted-foreground">
               Schedule your appointment.
             </p>
-          </div>
-          <div>
-            <ModeToggle />
-          </div>
+          </section>
+
+          <ModeToggle />
         </div>
 
         <CustomFormField
