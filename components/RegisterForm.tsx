@@ -216,7 +216,7 @@ const RegisterForm = ({ user }: { user: User }) => {
           <CustomFormField
             name="emergencyContactName"
             label="Emergency Contact Name"
-            placeholder="Sarah Doe"
+            placeholder="Guardian's Name"
             icon={<BookUser size={16} />}
             control={form.control}
             formFieldType={FormFieldType.INPUT}
