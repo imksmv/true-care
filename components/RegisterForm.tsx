@@ -75,12 +75,14 @@ const RegisterForm = ({ user }: { user: User }) => {
             <h1 className="text-3xl font-semibold tracking-tight">
               Welcome, {user.name}!
             </h1>
-            <p className="text-sm text-muted-foreground">
+            <p className="min-w-56 text-sm text-muted-foreground">
               Let us know more about yourself and your medical history.
             </p>
           </div>
 
-          <ModeToggle />
+          <div className="px-6">
+            <ModeToggle />
+          </div>
         </section>
 
         <section>
