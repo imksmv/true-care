@@ -11,6 +11,7 @@ import { Control } from "react-hook-form";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { FormFieldType } from "./PatientForm";
+import DatePicker from "./DatePicker";
 
 interface Props {
   control: Control<any>;
@@ -73,6 +74,9 @@ const RenderField = ({ field, props }: { field: any; props: Props }) => {
           />
         </FormControl>
       );
+
+    case FormFieldType.DATE_PICKER:
+      return <DatePicker />;
 
     default:
       return null;

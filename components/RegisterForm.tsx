@@ -1,10 +1,12 @@
 "use client";
 
-import { Form } from "@/components/ui/form";
+import { Form, FormControl } from "@/components/ui/form";
+import { GENDER_OPTIONS } from "@/constants";
 import { createUser } from "@/lib/actions/patient.actions";
 import { UserFormValidation } from "@/lib/validation";
+import { User } from "@/types/index.types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Mail, Phone, User as UserIcon } from "lucide-react";
+import { Cake, Mail, Phone, SquareUser, Users } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -14,7 +16,8 @@ import CustomFormField from "./CustomFormField";
 import { FormFieldType } from "./PatientForm";
 import SubmitButton from "./SubmitButton";
 import ModeToggle from "./ThemeToggle";
-import { User } from "@/types/index.types";
+import { Label } from "./ui/label";
+import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 
 const RegisterForm = ({ user }: { user: User }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -52,7 +55,7 @@ const RegisterForm = ({ user }: { user: User }) => {
   };
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="my-4 space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="my-4 space-y-8">
         <section className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-semibold tracking-tight">
@@ -74,12 +77,12 @@ const RegisterForm = ({ user }: { user: User }) => {
           name="name"
           label="Full Name"
           placeholder="John Doe"
-          icon={<UserIcon size={16} />}
+          icon={<SquareUser size={16} />}
           control={form.control}
           formFieldType={FormFieldType.INPUT}
         />
 
-        <div className="flex flex-col gap-6 lg:flex-row">
+        <div className="column-layout">
           <CustomFormField
             name="email"
             label="Email"
@@ -98,6 +101,46 @@ const RegisterForm = ({ user }: { user: User }) => {
           />
         </div>
 
+        <div className="column-layout">
+          <CustomFormField
+            name="birthDate"
+            label="Date of Birth"
+            icon={<Cake size={16} />}
+            control={form.control}
+            formFieldType={FormFieldType.DATE_PICKER}
+          />
+
+          <CustomFormField
+            name="gender"
+            label="Gender"
+            icon={<Users size={16} />}
+            control={form.control}
+            formFieldType={FormFieldType.SKELETON}
+            renderSkeleton={(field) => (
+              <FormControl>
+                <RadioGroup
+                  className="TODO"
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  {GENDER_OPTIONS.map((option) => (
+                    <RadioGroupItem
+                      key={option}
+                      value={option}
+                      className="TODO"
+                      id={option}
+                    >
+                      <Label htmlFor={option}>{option}</Label>
+                    </RadioGroupItem>
+                  ))}
+                </RadioGroup>
+              </FormControl>
+            )}
+          />
+        </div>
+        <div className="column-layout"></div>
+        <div className="column-layout"></div>
+        <div className="column-layout"></div>
         <SubmitButton className="w-full font-bold" isLoading={isLoading}>
           Get Started
         </SubmitButton>

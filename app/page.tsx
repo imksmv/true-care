@@ -10,6 +10,7 @@ const HomePage = () => {
         <div className="container flex max-w-[36rem] flex-col justify-center">
           <div className="flex items-center gap-2">
             <Image
+              priority
               className="h-8 w-8"
               src="/logo.png"
               alt="Logo"
