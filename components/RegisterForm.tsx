@@ -6,7 +6,7 @@ import { createUser } from "@/lib/actions/patient.actions";
 import { UserFormValidation } from "@/lib/validation";
 import { User } from "@/types/index.types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Cake, Mail, Phone, SquareUser, Users } from "lucide-react";
+import { Cake, Mail, MapPinned, Phone, SquareUser, Users } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -69,9 +69,11 @@ const RegisterForm = ({ user }: { user: User }) => {
           <ModeToggle />
         </section>
 
-        <h2 className="border-b pb-2 text-2xl font-semibold tracking-tight">
-          Personal Details
-        </h2>
+        <section>
+          <h2 className="border-b pb-2 text-2xl font-semibold tracking-tight">
+            Personal Details
+          </h2>
+        </section>
 
         <CustomFormField
           name="name"
@@ -143,7 +145,22 @@ const RegisterForm = ({ user }: { user: User }) => {
             )}
           />
         </div>
-        <div className="column-layout"></div>
+
+        {/* <section>
+          <h2 className="border-b pb-2 text-2xl font-semibold tracking-tight">
+            Medical Information
+          </h2>
+        </section> */}
+        <div className="column-layout">
+          <CustomFormField
+            name="address"
+            label="Address"
+            placeholder="123 Main St."
+            icon={<MapPinned size={16} />}
+            control={form.control}
+            formFieldType={FormFieldType.INPUT}
+          />
+        </div>
         <div className="column-layout"></div>
         <div className="column-layout"></div>
         <SubmitButton className="w-full font-bold" isLoading={isLoading}>
