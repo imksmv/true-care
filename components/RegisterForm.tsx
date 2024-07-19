@@ -70,20 +70,20 @@ const RegisterForm = ({ user }: { user: User }) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="my-4 space-y-8">
-        <section className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-semibold tracking-tight">
-              Welcome, {user.name}!
-            </h1>
-            <p className="min-w-56 text-sm text-muted-foreground">
-              Let us know more about yourself and your medical history.
-            </p>
-          </div>
+        <div className="flex items-center justify-between">
+          <section>
+            <div>
+              <h1 className="text-3xl font-semibold tracking-tight">
+                Welcome, {user.name}!
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Let us know more about yourself and your medical history.
+              </p>
+            </div>
+          </section>
 
-          <div className="px-6">
-            <ModeToggle />
-          </div>
-        </section>
+          <ModeToggle />
+        </div>
 
         <section>
           <h2 className="h2">Personal Details</h2>
