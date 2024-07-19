@@ -1,6 +1,6 @@
 "use client";
 
-import { Form, FormControl } from "@/components/ui/form";
+import { Form, FormControl, FormItem } from "@/components/ui/form";
 import { GENDER_OPTIONS } from "@/constants";
 import { createUser } from "@/lib/actions/patient.actions";
 import { UserFormValidation } from "@/lib/validation";
@@ -166,24 +166,26 @@ const RegisterForm = ({ user }: { user: User }) => {
             renderSkeleton={(field) => (
               <FormControl>
                 <RadioGroup
-                  className="flex h-10"
                   onValueChange={field.onChange}
                   defaultValue={field.value}
+                  className="flex h-10 space-x-2"
                 >
                   {GENDER_OPTIONS.map((option) => (
-                    <div
+                    <FormItem
                       key={option}
-                      className="flex items-center gap-2 rounded-md border border-dashed bg-muted p-3"
+                      className="flex w-fit items-center space-x-2 space-y-0 rounded-md"
                     >
-                      <RadioGroupItem
-                        value={option}
-                        id={option}
-                        className="border border-dashed"
-                      />
-                      <Label htmlFor={option} className="cursor-pointer py-3">
+                      <FormControl>
+                        <RadioGroupItem
+                          value={option}
+                          id={option}
+                          className="rounded-none border border-dashed"
+                        />
+                      </FormControl>
+                      <Label htmlFor={option} className="cursor-pointer">
                         {option}
                       </Label>
-                    </div>
+                    </FormItem>
                   ))}
                 </RadioGroup>
               </FormControl>
