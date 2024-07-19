@@ -74,6 +74,9 @@
   .column-layout {
     @apply flex flex-col gap-6 lg:flex-row;
   }
+  .h2 {
+    @apply border-b pb-2 text-2xl font-semibold tracking-tight;
+  }
 }
 
 .PhoneInputInput {

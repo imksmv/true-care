@@ -3,10 +3,13 @@
 import { Form, FormControl, FormItem } from "@/components/ui/form";
 import { GENDER_OPTIONS } from "@/constants";
 import { createUser } from "@/lib/actions/patient.actions";
+import { cn } from "@/lib/utils";
 import { UserFormValidation } from "@/lib/validation";
 import { User } from "@/types/index.types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
 import {
+  BookUser,
   BriefcaseBusiness,
   Cake,
   Mail,
@@ -24,13 +27,11 @@ import CustomFormField from "./CustomFormField";
 import { FormFieldType } from "./PatientForm";
 import SubmitButton from "./SubmitButton";
 import ModeToggle from "./ThemeToggle";
-import { Label } from "./ui/label";
-import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
-import { cn } from "@/lib/utils";
-import { format } from "date-fns";
 import { Calendar } from "./ui/calendar";
+import { Label } from "./ui/label";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 
 const RegisterForm = ({ user }: { user: User }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -83,9 +84,7 @@ const RegisterForm = ({ user }: { user: User }) => {
         </section>
 
         <section>
-          <h2 className="border-b pb-2 text-2xl font-semibold tracking-tight">
-            Personal Details
-          </h2>
+          <h2 className="h2">Personal Details</h2>
         </section>
 
         <CustomFormField
@@ -193,12 +192,6 @@ const RegisterForm = ({ user }: { user: User }) => {
           />
         </div>
 
-        {/* <section>
-          <h2 className="border-b pb-2 text-2xl font-semibold tracking-tight">
-            Medical Information
-          </h2>
-        </section> */}
-
         <div className="column-layout">
           <CustomFormField
             name="address"
@@ -218,8 +211,38 @@ const RegisterForm = ({ user }: { user: User }) => {
             formFieldType={FormFieldType.INPUT}
           />
         </div>
-        <div className="column-layout"></div>
-        <div className="column-layout"></div>
+
+        <div className="column-layout">
+          <CustomFormField
+            name="emergencyContactName"
+            label="Emergency Contact Name"
+            placeholder="Sarah Doe"
+            icon={<BookUser size={16} />}
+            control={form.control}
+            formFieldType={FormFieldType.INPUT}
+          />
+
+          <CustomFormField
+            name="emergencyContactNumber"
+            label="Emergency Contact Number"
+            icon={<Phone size={16} />}
+            control={form.control}
+            formFieldType={FormFieldType.PHONE_INPUT}
+          />
+        </div>
+
+        <section>
+          <h2 className="h2">Medical Information</h2>
+        </section>
+
+        <CustomFormField
+          formFieldType={FormFieldType.SELECT}
+          control={form.control}
+          name="primaryPhysician"
+          label="Primary Physician"
+          placeholder="Select a physician"
+        />
+
         <SubmitButton className="w-full font-bold" isLoading={isLoading}>
           Get Started
         </SubmitButton>
