@@ -52,7 +52,7 @@ const CustomFormField = (props: Props) => {
 };
 
 const RenderField = ({ field, props }: { field: any; props: Props }) => {
-  const { formFieldType, placeholder } = props;
+  const { formFieldType, placeholder, renderSkeleton } = props;
 
   switch (formFieldType) {
     case FormFieldType.INPUT:
@@ -78,6 +78,8 @@ const RenderField = ({ field, props }: { field: any; props: Props }) => {
     case FormFieldType.DATE_PICKER:
       return <DatePicker />;
 
+    case FormFieldType.SKELETON:
+      return renderSkeleton ? renderSkeleton(field) : null;
     default:
       return null;
   }
