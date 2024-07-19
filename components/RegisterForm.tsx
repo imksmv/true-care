@@ -6,7 +6,15 @@ import { createUser } from "@/lib/actions/patient.actions";
 import { UserFormValidation } from "@/lib/validation";
 import { User } from "@/types/index.types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Cake, Mail, MapPinned, Phone, SquareUser, Users } from "lucide-react";
+import {
+  BriefcaseBusiness,
+  Cake,
+  Mail,
+  MapPinned,
+  Phone,
+  SquareUser,
+  Users,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -18,6 +26,11 @@ import SubmitButton from "./SubmitButton";
 import ModeToggle from "./ThemeToggle";
 import { Label } from "./ui/label";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { Button } from "./ui/button";
+import { cn } from "@/lib/utils";
+import { format } from "date-fns";
+import { Calendar } from "./ui/calendar";
 
 const RegisterForm = ({ user }: { user: User }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -109,7 +122,39 @@ const RegisterForm = ({ user }: { user: User }) => {
             label="Date of Birth"
             icon={<Cake size={16} />}
             control={form.control}
-            formFieldType={FormFieldType.DATE_PICKER}
+            formFieldType={FormFieldType.SKELETON}
+            renderDatePicker={(field) => (
+              <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      variant={"outline"}
+                      className={cn(
+                        "w-full justify-start pl-3 font-normal",
+                        !field.value && "text-muted-foreground",
+                      )}
+                    >
+                      {field.value ? (
+                        format(field.value, "PPP")
+                      ) : (
+                        <span>Pick a date</span>
+                      )}
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0">
+                  <Calendar
+                    mode="single"
+                    selected={field.value}
+                    onSelect={field.onChange}
+                    disabled={(date) =>
+                      date > new Date() || date < new Date("1900-01-01")
+                    }
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
+            )}
           />
 
           <CustomFormField
@@ -151,12 +196,22 @@ const RegisterForm = ({ user }: { user: User }) => {
             Medical Information
           </h2>
         </section> */}
+
         <div className="column-layout">
           <CustomFormField
             name="address"
             label="Address"
             placeholder="123 Main St."
             icon={<MapPinned size={16} />}
+            control={form.control}
+            formFieldType={FormFieldType.INPUT}
+          />
+
+          <CustomFormField
+            name="occupation"
+            label="Occupation"
+            placeholder="Software Engineer"
+            icon={<BriefcaseBusiness size={16} />}
             control={form.control}
             formFieldType={FormFieldType.INPUT}
           />

@@ -11,7 +11,6 @@ import { Control } from "react-hook-form";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { FormFieldType } from "./PatientForm";
-import DatePicker from "./DatePicker";
 
 interface Props {
   control: Control<any>;
@@ -25,6 +24,7 @@ interface Props {
   showTimeSelect?: boolean;
   children?: React.ReactNode;
   renderSkeleton?: (field: any) => React.ReactNode;
+  renderDatePicker?: (field: any) => React.ReactNode;
 }
 
 const CustomFormField = (props: Props) => {
@@ -52,7 +52,8 @@ const CustomFormField = (props: Props) => {
 };
 
 const RenderField = ({ field, props }: { field: any; props: Props }) => {
-  const { formFieldType, placeholder, renderSkeleton } = props;
+  const { formFieldType, placeholder, renderSkeleton, renderDatePicker } =
+    props;
 
   switch (formFieldType) {
     case FormFieldType.INPUT:
@@ -75,11 +76,11 @@ const RenderField = ({ field, props }: { field: any; props: Props }) => {
         </FormControl>
       );
 
-    case FormFieldType.DATE_PICKER:
-      return <DatePicker />;
-
     case FormFieldType.SKELETON:
-      return renderSkeleton ? renderSkeleton(field) : null;
+      if (renderSkeleton) return renderSkeleton(field);
+      if (renderDatePicker) return renderDatePicker(field);
+      return null;
+
     default:
       return null;
   }
