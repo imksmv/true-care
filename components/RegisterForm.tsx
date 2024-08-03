@@ -246,7 +246,7 @@ const RegisterForm = ({ user }: { user: User }) => {
         />
 
         <SubmitButton className="w-full font-bold" isLoading={isLoading}>
-          Get Started
+          Continue
         </SubmitButton>
       </form>
     </Form>

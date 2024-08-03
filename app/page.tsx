@@ -5,8 +5,8 @@ import Link from "next/link";
 
 const HomePage = () => {
   return (
-    <section>
-      <div className="grid h-screen grid-cols-1 lg:grid-cols-2">
+    <section className="h-full">
+      <div className="grid h-full grid-cols-1 lg:grid-cols-2">
         <div className="container flex max-w-[36rem] flex-col justify-center">
           <div className="flex items-center gap-2">
             <Image

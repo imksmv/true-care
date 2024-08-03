@@ -25,10 +25,7 @@ const RootLayout = ({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable,
-        )}
+        className={cn("bg-background font-sans antialiased", fontSans.variable)}
       >
         <ThemeProvider
           attribute="class"
@@ -36,7 +33,7 @@ const RootLayout = ({
           enableSystem
           disableTransitionOnChange
         >
-          <main>{children}</main>
+          <main className="h-full">{children}</main>
           <Toaster position="top-center" richColors />
         </ThemeProvider>
       </body>
