@@ -49,7 +49,10 @@ const PatientForm = () => {
       const newUser = await createUser(user);
 
       if (newUser) {
-        router.push(`/patients/${newUser.$id}/register`);
+        toast.success(
+          `Great start, ${newUser.name}! Now let's add some more details.`,
+        );
+        router.push(`/patients/${newUser.$id}/register?new=true`);
       }
     } catch (error) {
       toast.error("An error occurred while submitting the form.");
