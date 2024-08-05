@@ -53,10 +53,10 @@ const PatientForm = () => {
       }
     } catch (error) {
       toast.error("An error occurred while submitting the form.");
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="my-4 space-y-6">
