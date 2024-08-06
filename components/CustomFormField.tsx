@@ -70,8 +70,8 @@ const RenderField = ({ field, props }: { field: any; props: Props }) => {
             defaultCountry="GB"
             international
             withCountryCallingCode
-            value={field.value as E164Number | undefined}
-            onChange={field.onChange}
+            value={field.value as E164Number | ""}
+            onChange={(value) => field.onChange(value || "")}
           />
         </FormControl>
       );

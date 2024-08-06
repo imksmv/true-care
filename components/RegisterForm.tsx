@@ -50,7 +50,7 @@ const RegisterForm = ({ user }: { user: User }) => {
     defaultValues: {
       name: user.name ?? "",
       email: user.email ?? "",
-      phone: user.phone ?? "", // TODO: fix this
+      phone: user.phone ?? "",
     },
   });
 
@@ -75,6 +75,7 @@ const RegisterForm = ({ user }: { user: User }) => {
 
     setIsLoading(false);
   };
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="my-4 space-y-8">
