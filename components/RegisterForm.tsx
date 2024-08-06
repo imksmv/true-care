@@ -19,7 +19,7 @@ import {
   Users,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -37,12 +37,20 @@ const RegisterForm = ({ user }: { user: User }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
 
+  useEffect(() => {
+    if (user) {
+      toast.success(
+        `Great start, ${user.name}! Now let's add some more details.`,
+      );
+    }
+  }, [user]);
+
   const form = useForm<z.infer<typeof UserFormValidation>>({
     resolver: zodResolver(UserFormValidation),
     defaultValues: {
-      name: "",
-      email: "",
-      phone: undefined,
+      name: user.name ?? "",
+      email: user.email ?? "",
+      phone: user.phone ?? "", // TODO: fix this
     },
   });
 

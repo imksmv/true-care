@@ -49,9 +49,6 @@ const PatientForm = () => {
       const newUser = await createUser(user);
 
       if (newUser) {
-        toast.success(
-          `Great start, ${newUser.name}! Now let's add some more details.`,
-        );
         router.push(`/patients/${newUser.$id}/register?new=true`);
       }
     } catch (error) {
