@@ -11,6 +11,7 @@ import { Control } from "react-hook-form";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { FormFieldType } from "./PatientForm";
+import { Select, SelectContent, SelectTrigger, SelectValue } from "./ui/select";
 
 interface Props {
   control: Control<any>;
@@ -61,6 +62,18 @@ const RenderField = ({ field, props }: { field: any; props: Props }) => {
         <FormControl>
           <Input placeholder={placeholder} {...field} />
         </FormControl>
+      );
+
+    case FormFieldType.SELECT:
+      return (
+        <Select onValueChange={field.onValueChange} defaultValue={field.value}>
+          <FormControl>
+            <SelectTrigger>
+              <SelectValue placeholder={placeholder} />
+            </SelectTrigger>
+          </FormControl>
+          <SelectContent>{props.children}</SelectContent>
+        </Select>
       );
 
     case FormFieldType.PHONE_INPUT:

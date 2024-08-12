@@ -1,7 +1,7 @@
 "use client";
 
 import { Form, FormControl, FormItem } from "@/components/ui/form";
-import { GENDER_OPTIONS } from "@/constants";
+import { DOCTORS, GENDER_OPTIONS } from "@/constants";
 import { createUser } from "@/lib/actions/patient.actions";
 import { cn } from "@/lib/utils";
 import { UserFormValidation } from "@/lib/validation";
@@ -18,6 +18,7 @@ import {
   SquareUser,
   Users,
 } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -32,6 +33,7 @@ import { Calendar } from "./ui/calendar";
 import { Label } from "./ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
+import { SelectItem } from "./ui/select";
 
 const RegisterForm = ({ user }: { user: User }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -250,12 +252,26 @@ const RegisterForm = ({ user }: { user: User }) => {
         </section>
 
         <CustomFormField
-          formFieldType={FormFieldType.SELECT}
-          control={form.control}
           name="primaryPhysician"
           label="Primary Physician"
           placeholder="Select a physician"
-        />
+          control={form.control}
+          formFieldType={FormFieldType.SELECT}
+        >
+          {DOCTORS.map((doctor) => (
+            <SelectItem key={doctor.name} value={doctor.name}>
+              <div className="flex items-center gap-2">
+                <Image
+                  src={doctor.image}
+                  alt={doctor.name}
+                  width={26}
+                  height={26}
+                />
+                <p>{doctor.name}</p>
+              </div>
+            </SelectItem>
+          ))}
+        </CustomFormField>
 
         <SubmitButton className="w-full font-bold" isLoading={isLoading}>
           Continue
