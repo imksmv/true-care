@@ -8,10 +8,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { E164Number } from "libphonenumber-js";
 import { Control } from "react-hook-form";
-import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { FormFieldType } from "./PatientForm";
 import { Select, SelectContent, SelectTrigger, SelectValue } from "./ui/select";
+import { PhoneInput } from "./ui/phone-input";
 
 interface Props {
   control: Control<any>;
@@ -82,7 +82,6 @@ const RenderField = ({ field, props }: { field: any; props: Props }) => {
           <PhoneInput
             defaultCountry="GB"
             international
-            withCountryCallingCode
             value={field.value as E164Number | ""}
             onChange={(value) => field.onChange(value || "")}
           />
