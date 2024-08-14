@@ -26,7 +26,6 @@ interface Props {
   showTimeSelect?: boolean;
   children?: React.ReactNode;
   renderSkeleton?: (field: any) => React.ReactNode;
-  renderDatePicker?: (field: any) => React.ReactNode;
 }
 
 const CustomFormField = (props: Props) => {
@@ -54,8 +53,7 @@ const CustomFormField = (props: Props) => {
 };
 
 const RenderField = ({ field, props }: { field: any; props: Props }) => {
-  const { formFieldType, placeholder, renderSkeleton, renderDatePicker } =
-    props;
+  const { formFieldType, placeholder, renderSkeleton } = props;
 
   switch (formFieldType) {
     case FormFieldType.INPUT:
@@ -101,9 +99,7 @@ const RenderField = ({ field, props }: { field: any; props: Props }) => {
       );
 
     case FormFieldType.SKELETON:
-      if (renderSkeleton) return renderSkeleton(field);
-      if (renderDatePicker) return renderDatePicker(field);
-      return null;
+      return renderSkeleton?.(field);
 
     default:
       return null;

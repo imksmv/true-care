@@ -1,6 +1,7 @@
 "use client";
 
 import CustomFormField from "@/components/CustomFormField";
+import FileUploader from "@/components/FileUploader";
 import SubmitButton from "@/components/SubmitButton";
 import ModeToggle from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
@@ -33,6 +34,7 @@ import {
   ClipboardPenLine,
   ClipboardPlus,
   File,
+  FileDigit,
   Mail,
   MapPinned,
   Phone,
@@ -148,7 +150,7 @@ const RegisterForm = ({ user }: { user: User }) => {
             icon={<Cake size={16} />}
             control={form.control}
             formFieldType={FormFieldType.SKELETON}
-            renderDatePicker={(field) => (
+            renderSkeleton={(field) => (
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
@@ -365,6 +367,27 @@ const RegisterForm = ({ user }: { user: User }) => {
             </SelectItem>
           ))}
         </CustomFormField>
+
+        <CustomFormField
+          name="identificationNumber"
+          label="Identification Number"
+          placeholder="1234567890"
+          icon={<FileDigit size={16} />}
+          control={form.control}
+          formFieldType={FormFieldType.INPUT}
+        />
+
+        <CustomFormField
+          name="identificationDocument"
+          label="Scanned copy of identification document"
+          control={form.control}
+          formFieldType={FormFieldType.SKELETON}
+          renderSkeleton={(field) => (
+            <FormControl>
+              <FileUploader />
+            </FormControl>
+          )}
+        />
 
         <SubmitButton className="w-full font-bold" isLoading={isLoading}>
           Continue
