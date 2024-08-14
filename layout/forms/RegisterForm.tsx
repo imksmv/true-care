@@ -14,7 +14,11 @@ import {
 } from "@/components/ui/popover";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { SelectItem } from "@/components/ui/select";
-import { DOCTORS, GENDER_OPTIONS } from "@/config/constans";
+import {
+  DOCTORS,
+  GENDER_OPTIONS,
+  IDENTIFICATION_TYPES,
+} from "@/config/constans";
 import { FormFieldType } from "@/config/enums";
 import { User } from "@/config/types/index.types";
 import { createUser } from "@/lib/actions/patient.actions";
@@ -28,12 +32,14 @@ import {
   Cake,
   ClipboardPenLine,
   ClipboardPlus,
+  File,
   Mail,
   MapPinned,
   Phone,
   ShieldPlus,
   SquareUser,
   Users,
+  UserSearch,
 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -262,6 +268,7 @@ const RegisterForm = ({ user }: { user: User }) => {
           name="primaryPhysician"
           label="Primary Physician"
           placeholder="Select a physician"
+          icon={<UserSearch size={16} />}
           control={form.control}
           formFieldType={FormFieldType.SELECT}
         >
@@ -343,6 +350,21 @@ const RegisterForm = ({ user }: { user: User }) => {
         <section>
           <h2 className="h2">Identification and Verification</h2>
         </section>
+
+        <CustomFormField
+          name="identificationType"
+          label="Identification Type"
+          placeholder="Select an identification type"
+          icon={<File size={16} />}
+          control={form.control}
+          formFieldType={FormFieldType.SELECT}
+        >
+          {IDENTIFICATION_TYPES.map((type) => (
+            <SelectItem key={type} value={type}>
+              {type}
+            </SelectItem>
+          ))}
+        </CustomFormField>
 
         <SubmitButton className="w-full font-bold" isLoading={isLoading}>
           Continue
