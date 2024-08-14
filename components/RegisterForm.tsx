@@ -183,12 +183,12 @@ const RegisterForm = ({ user }: { user: User }) => {
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="flex h-10 space-x-2"
+                  className="flex h-10 justify-between"
                 >
                   {GENDER_OPTIONS.map((option) => (
                     <FormItem
                       key={option}
-                      className="flex w-fit items-center space-x-2 space-y-0 rounded-md"
+                      className="flex items-center space-x-1 space-y-0 rounded-md border px-2"
                     >
                       <FormControl>
                         <RadioGroupItem
@@ -272,6 +272,25 @@ const RegisterForm = ({ user }: { user: User }) => {
             </SelectItem>
           ))}
         </CustomFormField>
+
+        <div className="column-layout">
+          <CustomFormField
+            name="email"
+            label="Email"
+            placeholder="johndoe@example.com"
+            icon={<Mail size={16} />}
+            control={form.control}
+            formFieldType={FormFieldType.INPUT}
+          />
+
+          <CustomFormField
+            name="phone"
+            label="Phone Number"
+            icon={<Phone size={16} />}
+            control={form.control}
+            formFieldType={FormFieldType.PHONE_INPUT}
+          />
+        </div>
 
         <SubmitButton className="w-full font-bold" isLoading={isLoading}>
           Continue
