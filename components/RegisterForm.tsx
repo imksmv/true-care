@@ -57,7 +57,6 @@ const RegisterForm = ({ user }: { user: User }) => {
   });
 
   const onSubmit = async (values: z.infer<typeof UserFormValidation>) => {
-    console.log(values);
     setIsLoading(true);
 
     try {
