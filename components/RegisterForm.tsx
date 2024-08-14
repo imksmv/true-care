@@ -12,9 +12,12 @@ import {
   BookUser,
   BriefcaseBusiness,
   Cake,
+  ClipboardPenLine,
+  ClipboardPlus,
   Mail,
   MapPinned,
   Phone,
+  ShieldPlus,
   SquareUser,
   Users,
 } from "lucide-react";
@@ -275,22 +278,67 @@ const RegisterForm = ({ user }: { user: User }) => {
 
         <div className="column-layout">
           <CustomFormField
-            name="email"
-            label="Email"
-            placeholder="johndoe@example.com"
-            icon={<Mail size={16} />}
+            name="insuranceProvider"
+            label="Insurance Provider"
+            placeholder="Cigna, Bupa"
+            icon={<ShieldPlus size={16} />}
             control={form.control}
             formFieldType={FormFieldType.INPUT}
           />
 
           <CustomFormField
-            name="phone"
-            label="Phone Number"
-            icon={<Phone size={16} />}
+            name="insurancePolicyNumber"
+            label="Insurance Policy Number"
+            placeholder="UK123456789"
+            icon={<ClipboardPlus size={16} />}
             control={form.control}
-            formFieldType={FormFieldType.PHONE_INPUT}
+            formFieldType={FormFieldType.INPUT}
           />
         </div>
+
+        <div className="column-layout">
+          <CustomFormField
+            name="allergies"
+            label="Allergies (if applicable)"
+            placeholder="Peanuts, Penicillin, Pollen"
+            icon={<ClipboardPenLine size={16} />}
+            control={form.control}
+            formFieldType={FormFieldType.TEXTAREA}
+          />
+
+          <CustomFormField
+            name="currentMedication"
+            label="Current Medication (if applicable)"
+            placeholder="Ibuprofen 200mg, Paracetamol 500mg"
+            icon={<ClipboardPenLine size={16} />}
+            control={form.control}
+            formFieldType={FormFieldType.TEXTAREA}
+          />
+        </div>
+
+        <div className="column-layout">
+          <CustomFormField
+            name="familyMedicalHistory"
+            label="Family Medical History"
+            placeholder="Diabetes, Heart disease"
+            icon={<ClipboardPenLine size={16} />}
+            control={form.control}
+            formFieldType={FormFieldType.TEXTAREA}
+          />
+
+          <CustomFormField
+            name="pastMedicalHistory"
+            label="Past Medical History"
+            placeholder="Appendectomy, Tonsillectomy"
+            icon={<ClipboardPenLine size={16} />}
+            control={form.control}
+            formFieldType={FormFieldType.TEXTAREA}
+          />
+        </div>
+
+        <section>
+          <h2 className="h2">Identification and Verification</h2>
+        </section>
 
         <SubmitButton className="w-full font-bold" isLoading={isLoading}>
           Continue

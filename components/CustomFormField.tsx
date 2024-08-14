@@ -10,8 +10,9 @@ import { E164Number } from "libphonenumber-js";
 import { Control } from "react-hook-form";
 import "react-phone-number-input/style.css";
 import { FormFieldType } from "./PatientForm";
-import { Select, SelectContent, SelectTrigger, SelectValue } from "./ui/select";
 import { PhoneInput } from "./ui/phone-input";
+import { Select, SelectContent, SelectTrigger, SelectValue } from "./ui/select";
+import { Textarea } from "./ui/textarea";
 
 interface Props {
   control: Control<any>;
@@ -61,6 +62,17 @@ const RenderField = ({ field, props }: { field: any; props: Props }) => {
       return (
         <FormControl>
           <Input placeholder={placeholder} {...field} />
+        </FormControl>
+      );
+
+    case FormFieldType.TEXTAREA:
+      return (
+        <FormControl>
+          <Textarea
+            placeholder={placeholder}
+            className="resize-none"
+            {...field}
+          />
         </FormControl>
       );
 
