@@ -1,11 +1,25 @@
 "use client";
 
+import CustomFormField from "@/components/CustomFormField";
+import SubmitButton from "@/components/SubmitButton";
+import ModeToggle from "@/components/ThemeToggle";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import { Form, FormControl, FormItem } from "@/components/ui/form";
-import { DOCTORS, GENDER_OPTIONS } from "@/constants";
+import { Label } from "@/components/ui/label";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { SelectItem } from "@/components/ui/select";
+import { DOCTORS, GENDER_OPTIONS } from "@/config/constans";
+import { FormFieldType } from "@/config/enums";
+import { User } from "@/config/types/index.types";
 import { createUser } from "@/lib/actions/patient.actions";
 import { cn } from "@/lib/utils";
 import { UserFormValidation } from "@/lib/validation";
-import { User } from "@/types/index.types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import {
@@ -27,16 +41,6 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import CustomFormField from "./CustomFormField";
-import { FormFieldType } from "./PatientForm";
-import SubmitButton from "./SubmitButton";
-import ModeToggle from "./ThemeToggle";
-import { Button } from "./ui/button";
-import { Calendar } from "./ui/calendar";
-import { Label } from "./ui/label";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
-import { SelectItem } from "./ui/select";
 
 const RegisterForm = ({ user }: { user: User }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);

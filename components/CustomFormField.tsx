@@ -6,10 +6,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { FormFieldType } from "@/config/enums";
 import { E164Number } from "libphonenumber-js";
 import { Control } from "react-hook-form";
 import "react-phone-number-input/style.css";
-import { FormFieldType } from "./PatientForm";
 import { PhoneInput } from "./ui/phone-input";
 import { Select, SelectContent, SelectTrigger, SelectValue } from "./ui/select";
 import { Textarea } from "./ui/textarea";

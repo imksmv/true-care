@@ -1,7 +1,7 @@
-import RegisterForm from "@/components/RegisterForm";
 import { Button } from "@/components/ui/button";
+import { SearchParamProps } from "@/config/types/index.types";
+import RegisterForm from "@/layout/forms/RegisterForm";
 import { getUser } from "@/lib/actions/patient.actions";
-import { SearchParamProps } from "@/types/index.types";
 import Image from "next/image";
 import Link from "next/link";
 

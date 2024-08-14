@@ -1,6 +1,6 @@
 "use server";
 
-import { CreateUserParams } from "@/types/index.types";
+import { CreateUserParams } from "@/config/types/index.types";
 import { ID, Query } from "node-appwrite";
 import { users } from "../appwrite.config";
 

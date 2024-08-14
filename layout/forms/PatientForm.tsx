@@ -1,6 +1,10 @@
 "use client";
 
+import CustomFormField from "@/components/CustomFormField";
+import SubmitButton from "@/components/SubmitButton";
+import ModeToggle from "@/components/ThemeToggle";
 import { Form } from "@/components/ui/form";
+import { FormFieldType } from "@/config/enums";
 import { createUser } from "@/lib/actions/patient.actions";
 import { UserFormValidation } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,18 +14,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import CustomFormField from "./CustomFormField";
-import SubmitButton from "./SubmitButton";
-import ModeToggle from "./ThemeToggle";
-
-export enum FormFieldType {
-  INPUT = "input",
-  TEXTAREA = "textarea",
-  PHONE_INPUT = "phone_input",
-  CHECKBOX = "checkbox",
-  SELECT = "select",
-  SKELETON = "skeleton",
-}
 
 const PatientForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);

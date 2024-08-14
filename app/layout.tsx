@@ -1,7 +1,7 @@
 import ThemeProvider from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
+import { SETTINGS } from "@/config/constans";
 import { cn } from "@/lib/utils";
-import { settings } from "@/settings";
 import type { Metadata } from "next";
 import { Roboto as FontSans } from "next/font/google";
 import "/styles/globals.css";
@@ -13,8 +13,8 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: settings.name,
-  description: settings.description,
+  title: SETTINGS.name,
+  description: SETTINGS.description,
 };
 
 const RootLayout = ({
