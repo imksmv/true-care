@@ -74,6 +74,22 @@
     @apply bg-background text-foreground;
     -webkit-tap-highlight-color: transparent;
   }
+
+  .remove-scrollbar::-webkit-scrollbar {
+    @apply h-0 w-0 rounded-none;
+  }
+
+  .remove-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  .remove-scrollbar::-webkit-scrollbar-thumb {
+    @apply rounded-none bg-transparent;
+  }
+
+  .remove-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-transparent;
+  }
 }
 
 @layer components {

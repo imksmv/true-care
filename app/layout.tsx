@@ -25,7 +25,10 @@ const RootLayout = ({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={cn("bg-background font-sans antialiased", fontSans.variable)}
+        className={cn(
+          "remove-scrollbar bg-background font-sans antialiased",
+          fontSans.variable,
+        )}
       >
         <ThemeProvider
           attribute="class"

@@ -35,6 +35,7 @@ import {
   ClipboardPlus,
   File,
   FileDigit,
+  FileInput,
   Mail,
   MapPinned,
   Phone,
@@ -379,7 +380,8 @@ const RegisterForm = ({ user }: { user: User }) => {
 
         <CustomFormField
           name="identificationDocument"
-          label="Scanned copy of identification document"
+          label="Scanned Copy of Identification Document"
+          icon={<FileInput size={16} />}
           control={form.control}
           formFieldType={FormFieldType.SKELETON}
           renderSkeleton={(field) => (
@@ -401,13 +403,13 @@ const RegisterForm = ({ user }: { user: User }) => {
         />
         <CustomFormField
           name="disclosureConsent"
-          label="I consent to disclosure of information"
+          label="I consent to Disclosure of Information"
           control={form.control}
           formFieldType={FormFieldType.CHECKBOX}
         />
         <CustomFormField
           name="privacyConsent"
-          label="I consent to privacy policy"
+          label="I consent to Privacy Policy"
           control={form.control}
           formFieldType={FormFieldType.CHECKBOX}
         />
