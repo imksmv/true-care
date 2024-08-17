@@ -384,7 +384,7 @@ const RegisterForm = ({ user }: { user: User }) => {
           formFieldType={FormFieldType.SKELETON}
           renderSkeleton={(field) => (
             <FormControl>
-              <FileUploader />
+              <FileUploader files={field.value} onChange={field.onChange} />
             </FormControl>
           )}
         />
