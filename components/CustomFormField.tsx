@@ -10,6 +10,7 @@ import { FormFieldType } from "@/config/enums";
 import { E164Number } from "libphonenumber-js";
 import { Control } from "react-hook-form";
 import "react-phone-number-input/style.css";
+import { Checkbox } from "./ui/checkbox";
 import { PhoneInput } from "./ui/phone-input";
 import { Select, SelectContent, SelectTrigger, SelectValue } from "./ui/select";
 import { Textarea } from "./ui/textarea";
@@ -71,6 +72,20 @@ const RenderField = ({ field, props }: { field: any; props: Props }) => {
             className="resize-none"
             {...field}
           />
+        </FormControl>
+      );
+
+    case FormFieldType.CHECKBOX:
+      return (
+        <FormControl>
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id={props.name}
+              checked={field.value}
+              onCheckedChange={field.onChange}
+            />
+            <label htmlFor={props.name}>{props.label}</label>
+          </div>
         </FormControl>
       );
 

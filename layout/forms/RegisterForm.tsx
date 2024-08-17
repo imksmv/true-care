@@ -209,7 +209,7 @@ const RegisterForm = ({ user }: { user: User }) => {
                         <RadioGroupItem
                           value={option}
                           id={option}
-                          className="rounded-none border border-dashed"
+                          className="rounded-none"
                         />
                       </FormControl>
                       <Label htmlFor={option} className="cursor-pointer">
@@ -387,6 +387,29 @@ const RegisterForm = ({ user }: { user: User }) => {
               <FileUploader files={field.value} onChange={field.onChange} />
             </FormControl>
           )}
+        />
+
+        <section>
+          <h2 className="h2">Consent and Privacy</h2>
+        </section>
+
+        <CustomFormField
+          name="treatmentConsent"
+          label="I consent to treatment"
+          control={form.control}
+          formFieldType={FormFieldType.CHECKBOX}
+        />
+        <CustomFormField
+          name="disclosureConsent"
+          label="I consent to disclosure of information"
+          control={form.control}
+          formFieldType={FormFieldType.CHECKBOX}
+        />
+        <CustomFormField
+          name="privacyConsent"
+          label="I consent to privacy policy"
+          control={form.control}
+          formFieldType={FormFieldType.CHECKBOX}
         />
 
         <SubmitButton className="w-full font-bold" isLoading={isLoading}>
