@@ -1,6 +1,6 @@
 import ThemeProvider from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
-import { SETTINGS } from "@/config/constans";
+import { SETTINGS } from "@/lib/constans";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Roboto as FontSans } from "next/font/google";

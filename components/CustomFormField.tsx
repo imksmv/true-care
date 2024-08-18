@@ -6,7 +6,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { FormFieldType } from "@/config/enums";
+import { FormFieldType } from "@/lib/enums";
 import { E164Number } from "libphonenumber-js";
 import { Control } from "react-hook-form";
 import "react-phone-number-input/style.css";

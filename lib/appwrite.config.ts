@@ -1,4 +1,4 @@
-import { API_KEY, ENDPOINT, PROJECT_ID } from "@/config/constans";
+import { API_KEY, ENDPOINT, PROJECT_ID } from "@/lib/constans";
 import * as sdk from "node-appwrite";
 
 const client = new sdk.Client();
