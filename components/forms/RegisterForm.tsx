@@ -2,6 +2,7 @@
 
 import CustomFormField from "@/components/CustomFormField";
 import FileUploader from "@/components/FileUploader";
+import useConfetti from "@/components/hooks/useConfetti";
 import SubmitButton from "@/components/SubmitButton";
 import ModeToggle from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
@@ -61,6 +62,7 @@ const RegisterForm = ({ user }: { user: User }) => {
       toast.success(
         `Great start, ${user.name}! Now let's add some more details.`,
       );
+      useConfetti();
     }
   }, [user]);
 
@@ -112,7 +114,7 @@ const RegisterForm = ({ user }: { user: User }) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="my-4 space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="my-4 space-y-6">
         <div className="flex items-center justify-between">
           <section>
             <div>
@@ -411,24 +413,26 @@ const RegisterForm = ({ user }: { user: User }) => {
           <h2 className="h2">Consent and Privacy</h2>
         </section>
 
-        <CustomFormField
-          name="treatmentConsent"
-          label="I consent to treatment"
-          control={form.control}
-          formFieldType={FormFieldType.CHECKBOX}
-        />
-        <CustomFormField
-          name="disclosureConsent"
-          label="I consent to Disclosure of Information"
-          control={form.control}
-          formFieldType={FormFieldType.CHECKBOX}
-        />
-        <CustomFormField
-          name="privacyConsent"
-          label="I consent to Privacy Policy"
-          control={form.control}
-          formFieldType={FormFieldType.CHECKBOX}
-        />
+        <div className="flex flex-col gap-2">
+          <CustomFormField
+            name="treatmentConsent"
+            label="I consent to treatment"
+            control={form.control}
+            formFieldType={FormFieldType.CHECKBOX}
+          />
+          <CustomFormField
+            name="disclosureConsent"
+            label="I consent to Disclosure of Information"
+            control={form.control}
+            formFieldType={FormFieldType.CHECKBOX}
+          />
+          <CustomFormField
+            name="privacyConsent"
+            label="I consent to Privacy Policy"
+            control={form.control}
+            formFieldType={FormFieldType.CHECKBOX}
+          />
+        </div>
 
         <SubmitButton className="w-full font-bold" isLoading={isLoading}>
           Continue
