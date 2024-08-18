@@ -1,6 +1,30 @@
+import { Gender } from "./types/index.types";
+
 export const SETTINGS = {
   name: "True Care",
   description: "True Care is an app",
+};
+
+export const PATIENT_FORM_DEFAULT_VALUES = {
+  birthDate: new Date(Date.now()),
+  gender: "Male" as Gender,
+  address: "",
+  occupation: "",
+  emergencyContactName: "",
+  emergencyContactNumber: "",
+  primaryPhysician: "",
+  insuranceProvider: "",
+  insurancePolicyNumber: "",
+  allergies: "",
+  currentMedication: "",
+  familyMedicalHistory: "",
+  pastMedicalHistory: "",
+  identificationType: "Birth Certificate",
+  identificationNumber: "",
+  identificationDocument: [],
+  treatmentConsent: false,
+  disclosureConsent: false,
+  privacyConsent: false,
 };
 
 export const {

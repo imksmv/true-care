@@ -19,12 +19,13 @@ import {
   DOCTORS,
   GENDER_OPTIONS,
   IDENTIFICATION_TYPES,
+  PATIENT_FORM_DEFAULT_VALUES,
 } from "@/config/constans";
 import { FormFieldType } from "@/config/enums";
 import { User } from "@/config/types/index.types";
 import { createUser } from "@/lib/actions/patient.actions";
 import { cn } from "@/lib/utils";
-import { UserFormValidation } from "@/lib/validation";
+import { PatientFormValidation } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import {
@@ -63,16 +64,17 @@ const RegisterForm = ({ user }: { user: User }) => {
     }
   }, [user]);
 
-  const form = useForm<z.infer<typeof UserFormValidation>>({
-    resolver: zodResolver(UserFormValidation),
+  const form = useForm<z.infer<typeof PatientFormValidation>>({
+    resolver: zodResolver(PatientFormValidation),
     defaultValues: {
+      ...PATIENT_FORM_DEFAULT_VALUES,
       name: user.name ?? "",
       email: user.email ?? "",
       phone: user.phone ?? "",
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof UserFormValidation>) => {
+  const onSubmit = async (values: z.infer<typeof PatientFormValidation>) => {
     setIsLoading(true);
 
     try {
