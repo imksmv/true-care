@@ -1,4 +1,4 @@
-import RegisterForm from "@/layout/forms/RegisterForm";
+import RegisterForm from "@/components/forms/RegisterForm";
 import { getUser } from "@/lib/actions/patient.actions";
 import { SearchParamProps } from "@/lib/types/index.types";
 import { SETTINGS } from "@/lib/web.config";
@@ -38,7 +38,7 @@ const RegisterPage = async ({ params: { userId } }: SearchParamProps) => {
             priority
             className="h-full w-full object-cover"
             src="/register.webp"
-            alt="Hero"
+            alt="Register"
             width={1000}
             height={1000}
           />

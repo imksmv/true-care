@@ -117,7 +117,7 @@ const RegisterForm = ({ user }: { user: User }) => {
           <section>
             <div>
               <h1 className="text-3xl font-semibold tracking-tight">
-                Welcome, {user.name}!
+                Additional Details
               </h1>
               <p className="text-sm text-muted-foreground">
                 Let us know more about yourself and your medical history.

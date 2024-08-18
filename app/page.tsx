@@ -1,5 +1,5 @@
+import PatientForm from "@/components/forms/PatientForm";
 import { Button } from "@/components/ui/button";
-import PatientForm from "@/layout/forms/PatientForm";
 import { SETTINGS } from "@/lib/web.config";
 import Image from "next/image";
 import Link from "next/link";

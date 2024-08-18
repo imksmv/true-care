@@ -8,14 +8,22 @@ import { createUser } from "@/lib/actions/patient.actions";
 import { FormFieldType } from "@/lib/enums";
 import { UserFormValidation } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Mail, Phone, User } from "lucide-react";
+import { Mail, Phone, SquareUser } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-const PatientForm = () => {
+const AppointmentForm = ({
+  type,
+  userId,
+  patientId,
+}: {
+  type: "create" | "cancel";
+  userId: string;
+  patientId: string;
+}) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
 
@@ -54,16 +62,11 @@ const PatientForm = () => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="my-4 space-y-6">
         <div className="flex items-center justify-between">
           <section>
-            <div className="flex items-center gap-2">
-              <h1 className="text-3xl font-semibold tracking-tight">
-                Greetings, friend!
-              </h1>
-              <div className="origin-bottom-right animate-wave text-3xl">
-                👋
-              </div>
-            </div>
+            <h1 className="text-3xl font-semibold tracking-tight">
+              New Appointment
+            </h1>
             <p className="text-sm text-muted-foreground">
-              Schedule your appointment.
+              Make a new appointment in 10 seconds
             </p>
           </section>
 
@@ -74,7 +77,7 @@ const PatientForm = () => {
           name="name"
           label="Full Name"
           placeholder="John Doe"
-          icon={<User size={16} />}
+          icon={<SquareUser size={16} />}
           control={form.control}
           formFieldType={FormFieldType.INPUT}
         />
@@ -104,4 +107,4 @@ const PatientForm = () => {
   );
 };
 
-export default PatientForm;
+export default AppointmentForm;
