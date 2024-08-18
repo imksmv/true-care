@@ -1,10 +1,5 @@
 import { Gender } from "./types/index.types";
 
-export const SETTINGS = {
-  name: "True Care",
-  description: "True Care is an app",
-};
-
 export const PATIENT_FORM_DEFAULT_VALUES = {
   birthDate: new Date(Date.now()),
   gender: "male" as Gender,

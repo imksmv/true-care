@@ -1,6 +1,5 @@
 "use server";
 
-import { CreateUserParams, RegisterUserParams } from "@/lib/types/index.types";
 import {
   BUCKET_ID,
   DATABASE_ID,
@@ -8,6 +7,7 @@ import {
   PATIENT_COLLECTION_ID,
   PROJECT_ID,
 } from "@/lib/constans";
+import { CreateUserParams, RegisterUserParams } from "@/lib/types/index.types";
 import { ID, Query } from "node-appwrite";
 import { InputFile } from "node-appwrite/file";
 import { databases, storage, users } from "../appwrite.config";

@@ -1,6 +1,7 @@
-import { SearchParamProps } from "@/lib/types/index.types";
 import RegisterForm from "@/layout/forms/RegisterForm";
 import { getUser } from "@/lib/actions/patient.actions";
+import { SearchParamProps } from "@/lib/types/index.types";
+import { SETTINGS } from "@/lib/web.config";
 import Image from "next/image";
 
 const RegisterPage = async ({ params: { userId } }: SearchParamProps) => {
@@ -19,7 +20,9 @@ const RegisterPage = async ({ params: { userId } }: SearchParamProps) => {
               width={100}
               height={100}
             />
-            <h3 className="text-2xl font-semibold tracking-tight">True Care</h3>
+            <h3 className="text-2xl font-semibold tracking-tight">
+              {SETTINGS.name}
+            </h3>
           </div>
 
           <RegisterForm user={user} />

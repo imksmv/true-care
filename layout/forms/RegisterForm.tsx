@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/popover";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { SelectItem } from "@/components/ui/select";
-import { User } from "@/lib/types/index.types";
 import { registerPatient } from "@/lib/actions/patient.actions";
 import {
   DOCTORS,
@@ -24,6 +23,7 @@ import {
   PATIENT_FORM_DEFAULT_VALUES,
 } from "@/lib/constans";
 import { FormFieldType } from "@/lib/enums";
+import { User } from "@/lib/types/index.types";
 import { capitalise, cn } from "@/lib/utils";
 import { PatientFormValidation } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";

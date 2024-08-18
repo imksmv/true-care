@@ -1,5 +1,6 @@
-import PatientForm from "@/layout/forms/PatientForm";
 import { Button } from "@/components/ui/button";
+import PatientForm from "@/layout/forms/PatientForm";
+import { SETTINGS } from "@/lib/web.config";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -17,7 +18,9 @@ const HomePage = () => {
               width={100}
               height={100}
             />
-            <h3 className="text-2xl font-semibold tracking-tight">True Care</h3>
+            <h3 className="text-2xl font-semibold tracking-tight">
+              {SETTINGS.name}
+            </h3>
           </div>
 
           <PatientForm />
