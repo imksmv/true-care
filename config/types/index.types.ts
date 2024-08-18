@@ -5,7 +5,7 @@ export type SearchParamProps = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export type Gender = "Male" | "Female" | "Other";
+export type Gender = "male" | "female" | "other";
 export type Status = "pending" | "scheduled" | "cancelled";
 
 export interface CreateUserParams {

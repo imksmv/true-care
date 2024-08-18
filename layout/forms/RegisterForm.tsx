@@ -23,8 +23,8 @@ import {
 } from "@/config/constans";
 import { FormFieldType } from "@/config/enums";
 import { User } from "@/config/types/index.types";
-import { createUser } from "@/lib/actions/patient.actions";
-import { cn } from "@/lib/utils";
+import { registerPatient } from "@/lib/actions/patient.actions";
+import { capitalise, cn } from "@/lib/utils";
 import { PatientFormValidation } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
@@ -77,18 +77,32 @@ const RegisterForm = ({ user }: { user: User }) => {
   const onSubmit = async (values: z.infer<typeof PatientFormValidation>) => {
     setIsLoading(true);
 
+    let formData;
+
+    if (
+      values.identificationDocument &&
+      values.identificationDocument.length > 0
+    ) {
+      const blobFile = new Blob([values.identificationDocument[0]], {
+        type: values.identificationDocument[0].type,
+      });
+
+      formData = new FormData();
+      formData.append("blobFile", blobFile);
+      formData.append("fileName", values.identificationDocument[0].name);
+    }
     try {
-      const user = {
-        name: values.name,
-        email: values.email,
-        phone: values.phone,
+      const patientData = {
+        ...values,
+        userId: user.$id,
+        birthDate: new Date(values.birthDate),
+        identificationDocument: formData,
       };
 
-      const newUser = await createUser(user);
+      //@ts-ignore
+      const patient = await registerPatient(patientData);
 
-      if (newUser) {
-        router.push(`/patients/${newUser.$id}/register`);
-      }
+      if (patient) router.push(`/patients/${user.$id}/new-appointment`);
     } catch (error) {
       toast.error("An error occurred while submitting the form.");
     }
@@ -216,7 +230,7 @@ const RegisterForm = ({ user }: { user: User }) => {
                         />
                       </FormControl>
                       <Label htmlFor={option} className="cursor-pointer">
-                        {option}
+                        {capitalise(option)}
                       </Label>
                     </FormItem>
                   ))}

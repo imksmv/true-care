@@ -91,7 +91,7 @@ const RenderField = ({ field, props }: { field: any; props: Props }) => {
 
     case FormFieldType.SELECT:
       return (
-        <Select onValueChange={field.onValueChange} defaultValue={field.value}>
+        <Select onValueChange={field.onChange} defaultValue={field.value}>
           <FormControl>
             <SelectTrigger>
               <SelectValue placeholder={placeholder} />

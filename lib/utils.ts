@@ -6,3 +6,6 @@ export const cn = (...inputs: ClassValue[]) => {
 };
 
 export const convertFileToUrl = (file: File) => URL.createObjectURL(file);
+
+export const capitalise = (s: string): string =>
+  s.charAt(0).toUpperCase() + s.slice(1);

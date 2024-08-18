@@ -7,7 +7,7 @@ export const SETTINGS = {
 
 export const PATIENT_FORM_DEFAULT_VALUES = {
   birthDate: new Date(Date.now()),
-  gender: "Male" as Gender,
+  gender: "male" as Gender,
   address: "",
   occupation: "",
   emergencyContactName: "",
@@ -19,7 +19,7 @@ export const PATIENT_FORM_DEFAULT_VALUES = {
   currentMedication: "",
   familyMedicalHistory: "",
   pastMedicalHistory: "",
-  identificationType: "Birth Certificate",
+  identificationType: "",
   identificationNumber: "",
   identificationDocument: [],
   treatmentConsent: false,
@@ -38,7 +38,7 @@ export const {
   NEXT_PUBLIC_BUCKET_ID: BUCKET_ID,
 } = process.env;
 
-export const GENDER_OPTIONS = ["Male", "Female", "Other"];
+export const GENDER_OPTIONS = ["male", "female", "other"];
 
 export const DOCTORS = [
   {
