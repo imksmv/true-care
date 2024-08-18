@@ -2,7 +2,7 @@
 
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { format, setMonth, setYear } from "date-fns";
+import { format, setMonth } from "date-fns";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import * as React from "react";
 import { DayPicker, useDayPicker, useNavigation } from "react-day-picker";
@@ -63,103 +63,72 @@ function Calendar({
             useDayPicker();
           const { goToMonth, currentMonth } = useNavigation();
 
-          const [selectedMonth, setSelectedMonth] = React.useState(
-            currentMonth.getMonth(),
-          );
-          const [selectedYear, setSelectedYear] = React.useState(
-            currentMonth.getFullYear(),
-          );
-
-          // Ensure the state updates when currentMonth changes
-          React.useEffect(() => {
-            setSelectedMonth(currentMonth.getMonth());
-            setSelectedYear(currentMonth.getFullYear());
-          }, [currentMonth]);
-
-          if (props.name === "months") {
-            const selectMonth = Array.from({ length: 12 }, (_, i) => ({
-              value: i.toString(),
-              label: format(setMonth(new Date(), i), "MMMM"),
-            }));
-
-            return (
-              <Select
-                value={selectedMonth.toString()}
-                onValueChange={(value) => {
-                  const newMonth = parseInt(value);
-                  setSelectedMonth(newMonth);
-                  goToMonth(
-                    setMonth(new Date(selectedYear, newMonth), newMonth),
-                  );
-                }}
-              >
-                <SelectTrigger>
-                  {format(
-                    setMonth(
-                      new Date(selectedYear, selectedMonth),
-                      selectedMonth,
-                    ),
-                    "MMMM",
-                  )}
-                </SelectTrigger>
-                <SelectContent>
-                  {selectMonth.map((month) => (
-                    <SelectItem key={month.value} value={month.value}>
-                      {month.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            );
-          }
-
-          if (props.name === "years") {
-            const earliestYear =
-              fromYear || fromMonth?.getFullYear() || fromDate?.getFullYear();
-            const latestYear =
-              toYear || toMonth?.getFullYear() || toDate?.getFullYear();
-
-            if (earliestYear && latestYear) {
-              const selectYears = Array.from(
-                { length: latestYear - earliestYear + 1 },
-                (_, i) => ({
-                  value: (latestYear - i).toString(),
-                  label: (latestYear - i).toString(),
-                }),
-              );
-
+          switch (props.name) {
+            case "months":
+              const selectMonth = Array.from({ length: 12 }, (_, i) => ({
+                value: i.toString(),
+                label: format(setMonth(new Date(), i), "MMMM"),
+              }));
               return (
                 <Select
-                  value={selectedYear.toString()}
-                  onValueChange={(value) => {
-                    const newYear = parseInt(value);
-                    setSelectedYear(newYear);
-                    goToMonth(
-                      setYear(new Date(newYear, selectedMonth), newYear),
-                    );
-                  }}
+                  onValueChange={(value) =>
+                    goToMonth(setMonth(currentMonth, parseInt(value)))
+                  }
                 >
-                  <SelectTrigger>{selectedYear}</SelectTrigger>
+                  <SelectTrigger>{format(currentMonth, "MMMM")}</SelectTrigger>
                   <SelectContent>
-                    {selectYears.map((year) => (
-                      <SelectItem key={year.value} value={year.value}>
-                        {year.label}
+                    {selectMonth.map((month) => (
+                      <SelectItem key={month.value} value={month.value}>
+                        {month.label}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               );
-            }
-          }
 
-          return null;
+            case "years":
+              const earliestYear =
+                fromYear || fromMonth?.getFullYear() || fromDate?.getFullYear();
+              const latestYear =
+                toYear || toMonth?.getFullYear() || toDate?.getFullYear();
+
+              if (earliestYear && latestYear) {
+                const selectYears = Array.from(
+                  { length: latestYear - earliestYear + 1 },
+                  (_, i) => ({
+                    value: (latestYear - i).toString(),
+                    label: (latestYear - i).toString(),
+                  }),
+                );
+                return (
+                  <Select
+                    onValueChange={(value) =>
+                      goToMonth(
+                        new Date(parseInt(value), currentMonth.getMonth()),
+                      )
+                    }
+                  >
+                    <SelectTrigger>{currentMonth.getFullYear()}</SelectTrigger>
+                    <SelectContent>
+                      {selectYears.map((year) => (
+                        <SelectItem key={year.value} value={year.value}>
+                          {year.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                );
+              }
+
+            default:
+              return null;
+          }
         },
       }}
       {...props}
     />
   );
 }
-
 Calendar.displayName = "Calendar";
 
 export { Calendar };
