@@ -2,7 +2,6 @@
 
 import CustomFormField from "@/components/CustomFormField";
 import FileUploader from "@/components/FileUploader";
-import useConfetti from "@/components/hooks/useConfetti";
 import SubmitButton from "@/components/SubmitButton";
 import ModeToggle from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
@@ -62,7 +61,6 @@ const RegisterForm = ({ user }: { user: User }) => {
       toast.success(
         `Great start, ${user.name}! Now let's add some more details.`,
       );
-      useConfetti();
     }
   }, [user]);
 
@@ -104,12 +102,13 @@ const RegisterForm = ({ user }: { user: User }) => {
       //@ts-ignore
       const patient = await registerPatient(patientData);
 
-      if (patient) router.push(`/patients/${user.$id}/new-appointment`);
+      if (patient) {
+        router.push(`/patients/${user.$id}/new-appointment`);
+      }
     } catch (error) {
       toast.error("An error occurred while submitting the form.");
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   return (

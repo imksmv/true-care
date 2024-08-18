@@ -57,6 +57,9 @@ export const getPatient = async (userId: string) => {
 
 export const registerPatient = async ({
   identificationDocument,
+  name,
+  email,
+  phone,
   ...patient
 }: RegisterUserParams) => {
   try {
@@ -71,6 +74,18 @@ export const registerPatient = async ({
       file = await storage.createFile(BUCKET_ID!, ID.unique(), inputFile);
     }
 
+    const existingUser = await users.get(patient.userId);
+
+    if (existingUser.name !== name) {
+      await users.updateName(patient.userId, name);
+    }
+    if (existingUser.email !== email) {
+      await users.updateEmail(patient.userId, email);
+    }
+    if (existingUser.phone !== phone) {
+      await users.updatePhone(patient.userId, phone);
+    }
+
     const newPatient = await databases.createDocument(
       DATABASE_ID!,
       PATIENT_COLLECTION_ID!,
@@ -78,6 +93,9 @@ export const registerPatient = async ({
       {
         identificationDocumentId: file?.$id || null,
         identificationDocumentUrl: `${ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${file?.$id}/view?project=${PROJECT_ID}`,
+        email,
+        name,
+        phone,
         ...patient,
       },
     );
