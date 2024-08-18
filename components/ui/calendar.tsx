@@ -75,7 +75,9 @@ function Calendar({
                     goToMonth(setMonth(currentMonth, parseInt(value)))
                   }
                 >
-                  <SelectTrigger>{format(currentMonth, "MMMM")}</SelectTrigger>
+                  <SelectTrigger className="bg-transparent hover:bg-secondary">
+                    {format(currentMonth, "MMMM")}
+                  </SelectTrigger>
                   <SelectContent>
                     {selectMonth.map((month) => (
                       <SelectItem key={month.value} value={month.value}>
@@ -108,7 +110,9 @@ function Calendar({
                       )
                     }
                   >
-                    <SelectTrigger>{currentMonth.getFullYear()}</SelectTrigger>
+                    <SelectTrigger className="bg-transparent hover:bg-secondary">
+                      {currentMonth.getFullYear()}
+                    </SelectTrigger>
                     <SelectContent>
                       {selectYears.map((year) => (
                         <SelectItem key={year.value} value={year.value}>

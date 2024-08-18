@@ -87,7 +87,7 @@ const CountrySelect = ({
         <Button
           type="button"
           variant="outline"
-          className="flex gap-1 rounded-e-none rounded-s-lg px-3"
+          className="mr-2 flex gap-1 rounded-e-none rounded-s-lg px-3"
           disabled={disabled}
         >
           <FlagComponent country={value} countryName={value} />
@@ -110,7 +110,7 @@ const CountrySelect = ({
                   .filter((x) => x.value)
                   .map((option) => (
                     <CommandItem
-                      className="gap-2"
+                      className="cursor-pointer gap-2"
                       key={option.value}
                       onSelect={() => handleSelect(option.value)}
                     >

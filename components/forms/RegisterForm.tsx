@@ -224,11 +224,7 @@ const RegisterForm = ({ user }: { user: User }) => {
                       className="flex items-center space-x-1 space-y-0 rounded-md border px-2"
                     >
                       <FormControl>
-                        <RadioGroupItem
-                          value={option}
-                          id={option}
-                          className="rounded-none"
-                        />
+                        <RadioGroupItem value={option} id={option} />
                       </FormControl>
                       <Label htmlFor={option} className="cursor-pointer">
                         {capitalise(option)}
