@@ -56,19 +56,19 @@ export const PatientFormValidation = z.object({
   identificationType: z.string().optional(),
   identificationNumber: z.string().optional(),
   identificationDocument: z.custom<File[]>().optional(),
-  treatmentConsent: z
+  treatmentConsentCheck: z
     .boolean()
     .default(false)
     .refine((value) => value === true, {
       message: "You must consent to treatment in order to proceed.",
     }),
-  disclosureConsent: z
+  disclosureConsentCheck: z
     .boolean()
     .default(false)
     .refine((value) => value === true, {
       message: "You must consent to disclosure in order to proceed.",
     }),
-  privacyConsent: z
+  privacyConsentCheck: z
     .boolean()
     .default(false)
     .refine((value) => value === true, {

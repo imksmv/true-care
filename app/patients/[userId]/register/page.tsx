@@ -10,7 +10,7 @@ const RegisterPage = async ({ params: { userId } }: SearchParamProps) => {
   return (
     <section className="h-full">
       <div className="grid h-full grid-cols-1 lg:grid-cols-2">
-        <div className="container mb-4 flex max-w-[36rem] flex-col justify-center">
+        <div className="container flex max-w-[36rem] flex-col justify-center">
           <div className="mt-4 flex items-center gap-2">
             <Image
               priority
@@ -27,7 +27,7 @@ const RegisterPage = async ({ params: { userId } }: SearchParamProps) => {
 
           <RegisterForm user={user} />
 
-          <span className="text-sm">
+          <span className="mb-4 text-sm">
             {new Date().getFullYear()} &copy; All Rights Reserved
           </span>
         </div>

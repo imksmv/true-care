@@ -294,8 +294,9 @@ const RegisterForm = ({ user }: { user: User }) => {
                 <Image
                   src={doctor.image}
                   alt={doctor.name}
-                  width={26}
-                  height={26}
+                  width={20}
+                  height={20}
+                  priority
                 />
                 <p>{doctor.name}</p>
               </div>
@@ -408,26 +409,24 @@ const RegisterForm = ({ user }: { user: User }) => {
           <h2 className="h2">Consent and Privacy</h2>
         </section>
 
-        <div className="flex flex-col gap-2">
-          <CustomFormField
-            name="treatmentConsent"
-            label="I consent to treatment"
-            control={form.control}
-            formFieldType={FormFieldType.CHECKBOX}
-          />
-          <CustomFormField
-            name="disclosureConsent"
-            label="I consent to Disclosure of Information"
-            control={form.control}
-            formFieldType={FormFieldType.CHECKBOX}
-          />
-          <CustomFormField
-            name="privacyConsent"
-            label="I consent to Privacy Policy"
-            control={form.control}
-            formFieldType={FormFieldType.CHECKBOX}
-          />
-        </div>
+        <CustomFormField
+          name="treatmentConsentCheck"
+          label="I consent to treatment"
+          control={form.control}
+          formFieldType={FormFieldType.CHECKBOX}
+        />
+        <CustomFormField
+          name="disclosureConsentCheck"
+          label="I consent to Disclosure of Information"
+          control={form.control}
+          formFieldType={FormFieldType.CHECKBOX}
+        />
+        <CustomFormField
+          name="privacyConsentCheck"
+          label="I consent to Privacy Policy"
+          control={form.control}
+          formFieldType={FormFieldType.CHECKBOX}
+        />
 
         <SubmitButton className="w-full font-bold" isLoading={isLoading}>
           Continue

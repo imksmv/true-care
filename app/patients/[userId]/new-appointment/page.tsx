@@ -31,7 +31,7 @@ const NewAppointment = async ({ params: { userId } }: SearchParamProps) => {
             patientId={patient.$id}
           />
 
-          <span className="text-sm">
+          <span className="mb-4 text-sm">
             {new Date().getFullYear()} &copy; All Rights Reserved
           </span>
         </div>

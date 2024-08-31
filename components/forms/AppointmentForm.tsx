@@ -3,12 +3,25 @@
 import CustomFormField from "@/components/CustomFormField";
 import SubmitButton from "@/components/SubmitButton";
 import ModeToggle from "@/components/ThemeToggle";
-import { Form } from "@/components/ui/form";
+import { TimePickerInput } from "@/components/TimePickerInput";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Form, FormControl } from "@/components/ui/form";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { SelectItem } from "@/components/ui/select";
 import { createUser } from "@/lib/actions/patient.actions";
+import { DOCTORS } from "@/lib/constans";
 import { FormFieldType } from "@/lib/enums";
+import { cn } from "@/lib/utils";
 import { UserFormValidation } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Mail, Phone, SquareUser } from "lucide-react";
+import { format } from "date-fns";
+import { CalendarClock, UserSearch } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -73,34 +86,83 @@ const AppointmentForm = ({
           <ModeToggle />
         </div>
 
-        <CustomFormField
-          name="name"
-          label="Full Name"
-          placeholder="John Doe"
-          icon={<SquareUser size={16} />}
-          control={form.control}
-          formFieldType={FormFieldType.INPUT}
-        />
+        {type !== "cancel" && (
+          <CustomFormField
+            name="primaryPhysician"
+            label="Doctor"
+            placeholder="Select a doctor"
+            icon={<UserSearch size={16} />}
+            control={form.control}
+            formFieldType={FormFieldType.SELECT}
+          >
+            {DOCTORS.map((doctor) => (
+              <SelectItem key={doctor.name} value={doctor.name}>
+                <div className="flex items-center gap-2">
+                  <Image
+                    src={doctor.image}
+                    alt={doctor.name}
+                    width={20}
+                    height={20}
+                    priority
+                  />
+                  <p>{doctor.name}</p>
+                </div>
+              </SelectItem>
+            ))}
+          </CustomFormField>
+        )}
 
         <CustomFormField
-          name="email"
-          label="Email"
-          placeholder="johndoe@example.com"
-          icon={<Mail size={16} />}
+          name="schedule"
+          label="Appointment date"
+          icon={<CalendarClock size={16} />}
           control={form.control}
-          formFieldType={FormFieldType.INPUT}
-        />
-
-        <CustomFormField
-          name="phone"
-          label="Phone Number"
-          icon={<Phone size={16} />}
-          control={form.control}
-          formFieldType={FormFieldType.PHONE_INPUT}
+          formFieldType={FormFieldType.SKELETON}
+          renderSkeleton={(field) => (
+            <Popover>
+              <PopoverTrigger asChild>
+                <FormControl>
+                  <Button
+                    variant={"outline"}
+                    className={cn(
+                      "w-full justify-start pl-3 font-normal",
+                      !field.value && "text-muted-foreground",
+                    )}
+                  >
+                    {field.value ? (
+                      format(field.value, "PPP HH:mm a")
+                    ) : (
+                      <span>Pick a date</span>
+                    )}
+                  </Button>
+                </FormControl>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0">
+                <Calendar
+                  mode="single"
+                  selected={field.value}
+                  onSelect={field.onChange}
+                  disabled={(date) =>
+                    date > new Date() || date < new Date("1900-01-01")
+                  }
+                  initialFocus
+                  captionLayout="dropdown-buttons"
+                  fromYear={1900}
+                  toYear={new Date().getFullYear()}
+                />
+                <div className="flex justify-center border-t border-border p-3">
+                  <TimePickerInput
+                    setDate={field.onChange}
+                    date={field.value}
+                  />
+                </div>
+              </PopoverContent>
+            </Popover>
+          )}
         />
 
         <SubmitButton className="w-full font-bold" isLoading={isLoading}>
-          Get Started
+          Continue
         </SubmitButton>
       </form>
     </Form>

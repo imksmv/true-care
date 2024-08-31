@@ -17,9 +17,9 @@ export const PATIENT_FORM_DEFAULT_VALUES = {
   identificationType: "",
   identificationNumber: "",
   identificationDocument: [],
-  treatmentConsent: false,
-  disclosureConsent: false,
-  privacyConsent: false,
+  treatmentConsentCheck: false,
+  disclosureConsentCheck: false,
+  privacyConsentCheck: false,
 };
 
 export const {
