@@ -1,16 +1,8 @@
 import { Input } from "@/components/ui/input";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
   Period,
   TimePickerType,
   cn,
-  display12HourValue,
   getArrowByType,
   getDateByType,
   setDateByType,
@@ -102,7 +94,7 @@ const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
         id={id || picker}
         name={name || picker}
         className={cn(
-          "w-[48px] text-center font-mono text-base tabular-nums caret-transparent focus:bg-accent focus:text-accent-foreground [&::-webkit-inner-spin-button]:appearance-none",
+          "w-[60px] bg-popover text-center text-base tabular-nums caret-transparent focus:bg-accent focus:text-accent-foreground [&::-webkit-inner-spin-button]:appearance-none",
           className,
         )}
         value={value || calculatedValue}
@@ -125,61 +117,3 @@ const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
 TimePicker.displayName = "TimePicker";
 
 export { TimePicker };
-
-export interface TimePeriodProps {
-  period: Period;
-  setPeriod: (m: Period) => void;
-  date: Date | undefined;
-  setDate: (date: Date | undefined) => void;
-  onRightFocus?: () => void;
-  onLeftFocus?: () => void;
-}
-
-export const TimePeriod = React.forwardRef<HTMLButtonElement, TimePeriodProps>(
-  ({ period, setPeriod, date, setDate, onLeftFocus, onRightFocus }, ref) => {
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-      if (e.key === "ArrowRight") onRightFocus?.();
-      if (e.key === "ArrowLeft") onLeftFocus?.();
-    };
-
-    const handleValueChange = (value: Period) => {
-      setPeriod(value);
-
-      if (date) {
-        const tempDate = new Date(date);
-        const hours = display12HourValue(date.getHours());
-        setDate(
-          setDateByType(
-            tempDate,
-            hours.toString(),
-            "12hours",
-            period === "AM" ? "PM" : "AM",
-          ),
-        );
-      }
-    };
-
-    return (
-      <div className="flex h-10 items-center">
-        <Select
-          defaultValue={period}
-          onValueChange={(value: Period) => handleValueChange(value)}
-        >
-          <SelectTrigger
-            ref={ref}
-            className="w-[65px] focus:bg-accent focus:text-accent-foreground"
-            onKeyDown={handleKeyDown}
-          >
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="AM">AM</SelectItem>
-            <SelectItem value="PM">PM</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-    );
-  },
-);
-
-TimePeriod.displayName = "TimePeriod";

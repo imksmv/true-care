@@ -9,7 +9,6 @@ export const capitalise = (s: string): string =>
   s.charAt(0).toUpperCase() + s.slice(1);
 
 // TimePicker utils
-
 export const isValidHour = (value: string) =>
   /^(0[0-9]|1[0-9]|2[0-3])$/.test(value);
 
