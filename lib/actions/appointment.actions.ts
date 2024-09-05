@@ -1,6 +1,8 @@
+"use server";
+
 import { ID } from "node-appwrite";
 import { databases } from "../appwrite.config";
-import { DATABASE_ID, PATIENT_COLLECTION_ID } from "../constans";
+import { APPOINTMENT_COLLECTION_ID, DATABASE_ID } from "../constans";
 import { CreateAppointmentParams } from "../types/index.types";
 
 export const createAppointment = async (
@@ -9,13 +11,14 @@ export const createAppointment = async (
   try {
     const newAppointment = await databases.createDocument(
       DATABASE_ID!,
-      PATIENT_COLLECTION_ID!,
+      APPOINTMENT_COLLECTION_ID!,
       ID.unique(),
       appointment,
     );
+    console.log(newAppointment);
 
     return newAppointment;
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 };

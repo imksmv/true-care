@@ -36,7 +36,7 @@ const AppointmentForm = ({
 }: {
   type: "create" | "cancel" | "schedule";
   userId: string;
-  patientId: string;
+  patientId: string | undefined;
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
@@ -90,7 +90,7 @@ const AppointmentForm = ({
         if (appointment) {
           form.reset();
           router.push(
-            `/patients/${userId}/new-appointment/success?appointmentId=${appointment.id}`,
+            `/patients/${userId}/new-appointment/success?appointmentId=${appointment.$id}`,
           );
         }
       }

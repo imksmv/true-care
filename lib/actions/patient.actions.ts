@@ -28,7 +28,7 @@ export const createUser = async (user: CreateUserParams) => {
       const documents = await users.list([Query.equal("email", user.email)]);
       return documents.users[0];
     } else {
-      throw error;
+      console.log(error);
     }
   }
 };
@@ -38,7 +38,7 @@ export const getUser = async (userId: string) => {
     const user = await users.get(userId);
     return user;
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 };
 
@@ -51,7 +51,7 @@ export const getPatient = async (userId: string) => {
     );
     return patients.documents[0];
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 };
 
@@ -102,6 +102,6 @@ export const registerPatient = async ({
 
     return newPatient;
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 };
