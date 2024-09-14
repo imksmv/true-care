@@ -15,9 +15,21 @@ export const createAppointment = async (
       ID.unique(),
       appointment,
     );
-    console.log(newAppointment);
 
     return newAppointment;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAppointment = async (appointmentId: string) => {
+  try {
+    const appointment = await databases.getDocument(
+      DATABASE_ID!,
+      APPOINTMENT_COLLECTION_ID!,
+      appointmentId,
+    );
+    return appointment;
   } catch (error) {
     console.log(error);
   }
