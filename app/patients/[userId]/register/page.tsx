@@ -1,6 +1,6 @@
 import RegisterForm from "@/components/forms/RegisterForm";
 import { getUser } from "@/lib/actions/patient.actions";
-import { SearchParamProps } from "@/lib/types/index.types";
+import { SearchParamProps, User } from "@/lib/types/index.types";
 import { SETTINGS } from "@/lib/web.config";
 import Image from "next/image";
 
@@ -25,7 +25,7 @@ const RegisterPage = async ({ params: { userId } }: SearchParamProps) => {
             </h3>
           </div>
 
-          <RegisterForm user={user} />
+          <RegisterForm user={user as User} />
 
           <span className="mb-4 text-sm">
             {new Date().getFullYear()} &copy; All Rights Reserved
