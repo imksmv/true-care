@@ -84,7 +84,9 @@ const RenderField = ({ field, props }: { field: any; props: Props }) => {
               checked={field.value}
               onCheckedChange={field.onChange}
             />
-            <label htmlFor={props.name}>{props.label}</label>
+            <label htmlFor={props.name} className="cursor-pointer">
+              {props.label}
+            </label>
           </div>
         </FormControl>
       );

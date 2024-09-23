@@ -189,12 +189,12 @@ const AppointmentForm = ({
                       selected={field.value}
                       onSelect={field.onChange}
                       disabled={(date) =>
-                        date > new Date() || date < new Date("1900-01-01")
+                        date < new Date(new Date().setHours(0, 0, 0, 0))
                       }
                       initialFocus
                       captionLayout="dropdown-buttons"
                       fromYear={1900}
-                      toYear={new Date().getFullYear()}
+                      toYear={new Date().getFullYear() + 1}
                     />
                     <div className="flex justify-center border-t border-border p-3">
                       <TimePickerInput
