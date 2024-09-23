@@ -172,3 +172,11 @@ export const display12HourValue = (hours: number) => {
   if (hours >= 22) return `${hours - 12}`;
   return hours % 12 > 9 ? `${hours}` : `0${hours % 12}`;
 };
+
+export function encryptPasskey(passkey: string) {
+  return btoa(passkey);
+}
+
+export function decryptPasskey(passkey: string) {
+  return atob(passkey);
+}

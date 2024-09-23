@@ -1,14 +1,20 @@
 import PatientForm from "@/components/forms/PatientForm";
+import PasskeyModal from "@/components/PasskeyModal";
 import { Button } from "@/components/ui/button";
+import { SearchParamProps } from "@/lib/types/index.types";
 import { SETTINGS } from "@/lib/web.config";
 import Image from "next/image";
 import Link from "next/link";
 
-const HomePage = () => {
+const HomePage = ({ searchParams }: SearchParamProps) => {
+  const isAdmin = searchParams.admin === "true";
+
   return (
     <section className="h-full">
       <div className="grid h-full grid-cols-1 lg:grid-cols-2">
         <div className="container flex max-w-[36rem] flex-col justify-center">
+          {isAdmin && <PasskeyModal />}
+
           <div className="flex items-center gap-2">
             <Image
               priority
@@ -22,20 +28,15 @@ const HomePage = () => {
               {SETTINGS.name}
             </h3>
           </div>
-
           <PatientForm />
-
           <div className="flex items-center justify-between text-sm">
             <span>{new Date().getFullYear()} &copy; All Rights Reserved</span>
 
             <Button asChild variant="link">
-              <Link className="" href="/?admin=true">
-                Control Panel
-              </Link>
+              <Link href="/?admin=true">Control Panel</Link>
             </Button>
           </div>
         </div>
-
         <div className="relative hidden h-full w-full lg:block">
           <div className="absolute left-0 top-0 h-full w-full bg-gradient-to-tr from-primary/5 to-primary/15" />
           <Image
