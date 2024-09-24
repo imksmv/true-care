@@ -14,23 +14,39 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { encryptPasskey } from "@/lib/utils";
+import { decryptPasskey, encryptPasskey } from "@/lib/utils";
 import { X } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const PasskeyModal = () => {
   const router = useRouter();
+  const path = usePathname();
   const [open, setOpen] = useState(true);
-  const [passkey, setPasskey] = useState("");
+  const [enteredKey, setEnteredKey] = useState("");
   const [error, setError] = useState("");
+
+  const encryptedPasskey = localStorage.getItem("accessKey");
+
+  useEffect(() => {
+    const encryptedKey = encryptedPasskey && decryptPasskey(encryptedPasskey);
+
+    if (path) {
+      if (encryptedKey === process.env.NEXT_PUBLIC_CONTORL_PANEL_PASSKEY) {
+        setOpen(false);
+        router.push("/control-panel");
+      } else {
+        setOpen(true);
+      }
+    }
+  }, [encryptedPasskey]);
 
   const validatePasskey = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     e.preventDefault();
-    if (passkey === process.env.NEXT_PUBLIC_CONTORL_PANEL_PASSKEY) {
-      const encryptedPasskey = encryptPasskey(passkey);
+    if (enteredKey === process.env.NEXT_PUBLIC_CONTORL_PANEL_PASSKEY) {
+      const encryptedPasskey = encryptPasskey(enteredKey);
 
       localStorage.setItem("accessKey", encryptedPasskey);
 
@@ -64,8 +80,8 @@ const PasskeyModal = () => {
         <>
           <InputOTP
             maxLength={6}
-            value={passkey}
-            onChange={(value) => setPasskey(value)}
+            value={enteredKey}
+            onChange={(value) => setEnteredKey(value)}
           >
             <InputOTPGroup className="flex w-full justify-between">
               <InputOTPSlot

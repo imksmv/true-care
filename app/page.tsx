@@ -7,13 +7,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 const HomePage = ({ searchParams }: SearchParamProps) => {
-  const isAdmin = searchParams.admin === "true";
+  const isControlPanel = searchParams.controlPanel === "true";
 
   return (
     <section className="h-full">
       <div className="grid h-full grid-cols-1 lg:grid-cols-2">
         <div className="container flex max-w-[36rem] flex-col justify-center">
-          {isAdmin && <PasskeyModal />}
+          {isControlPanel && <PasskeyModal />}
 
           <div className="flex items-center gap-2">
             <Image
@@ -33,7 +33,7 @@ const HomePage = ({ searchParams }: SearchParamProps) => {
             <span>{new Date().getFullYear()} &copy; All Rights Reserved</span>
 
             <Button asChild variant="link">
-              <Link href="/?admin=true">Control Panel</Link>
+              <Link href="/?controlPanel=true">Control Panel</Link>
             </Button>
           </div>
         </div>
