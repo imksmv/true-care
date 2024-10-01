@@ -1,3 +1,5 @@
+import React from "react";
+
 const Spinner = ({ label }: { label: string }) => {
   return (
     <>

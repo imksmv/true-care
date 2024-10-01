@@ -17,7 +17,7 @@ import {
 import { decryptPasskey, encryptPasskey } from "@/lib/utils";
 import { X } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const PasskeyModal = () => {
   const router = useRouter();

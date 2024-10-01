@@ -3,6 +3,7 @@
 import { convertFileToUrl } from "@/lib/utils";
 import { CloudUpload } from "lucide-react";
 import Image from "next/image";
+import React from "react";
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
