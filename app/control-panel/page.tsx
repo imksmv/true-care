@@ -1,5 +1,6 @@
 import StatCard from "@/components/StatCard";
 import { SETTINGS } from "@/lib/web.config";
+import { CalendarCheck2, CalendarClock, CalendarX2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -37,19 +38,19 @@ const ControlPanel = () => {
             type="appointments"
             count={5}
             label="Scheduled appointments"
-            icon={"asd"}
+            icon={<CalendarCheck2 size={28} />}
           />
           <StatCard
             type="pending"
             count={10}
             label="Pending appointments"
-            icon={"asd"}
+            icon={<CalendarClock size={28} />}
           />
           <StatCard
             type="cancelled"
             count={2}
             label="Cancelled appointments"
-            icon={"asd"}
+            icon={<CalendarX2 size={28} />}
           />
         </section>
       </main>
