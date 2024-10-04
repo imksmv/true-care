@@ -28,7 +28,9 @@ const HomePage = ({ searchParams }: SearchParamProps) => {
               {SETTINGS.name}
             </h3>
           </div>
+
           <PatientForm />
+
           <div className="flex items-center justify-between text-sm">
             <span>{new Date().getFullYear()} &copy; All Rights Reserved</span>
 
@@ -37,8 +39,10 @@ const HomePage = ({ searchParams }: SearchParamProps) => {
             </Button>
           </div>
         </div>
+
         <div className="relative hidden h-full w-full lg:block">
           <div className="absolute left-0 top-0 h-full w-full bg-gradient-to-tr from-primary/5 to-primary/15" />
+
           <Image
             priority
             className="h-full w-full object-cover"

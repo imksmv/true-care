@@ -3,8 +3,13 @@
 import { ID, Query } from "node-appwrite";
 import { databases } from "../appwrite.config";
 import { APPOINTMENT_COLLECTION_ID, DATABASE_ID } from "../constans";
-import { CreateAppointmentParams } from "../types/index.types";
+import {
+  CreateAppointmentParams,
+  UpdateAppointmentParams,
+} from "../types/index.types";
 import { Appointment } from "../types/appwrite.types";
+import { toast } from "sonner";
+import { revalidatePath } from "next/cache";
 
 export const createAppointment = async (
   appointment: CreateAppointmentParams,
@@ -78,6 +83,30 @@ export const getRecentAppointmentsList = async () => {
     };
 
     return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateAppointment = async ({
+  appointmentId,
+  appointment,
+}: UpdateAppointmentParams) => {
+  try {
+    const updatedAppointment = await databases.updateDocument(
+      DATABASE_ID!,
+      APPOINTMENT_COLLECTION_ID!,
+      appointmentId,
+      appointment,
+    );
+
+    if (!updatedAppointment) {
+      toast.error("An error occurred while updating the appointment.");
+    }
+
+    revalidatePath("/control-panel");
+
+    return updatedAppointment;
   } catch (error) {
     console.log(error);
   }

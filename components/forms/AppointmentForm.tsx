@@ -14,7 +14,10 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { SelectItem } from "@/components/ui/select";
-import { createAppointment } from "@/lib/actions/appointment.actions";
+import {
+  createAppointment,
+  updateAppointment,
+} from "@/lib/actions/appointment.actions";
 import { DOCTORS } from "@/lib/constans";
 import { FormFieldType } from "@/lib/enums";
 import { Status } from "@/lib/types/index.types";
@@ -29,15 +32,22 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import { Appointment } from "@/lib/types/appwrite.types";
 
 const AppointmentForm = ({
   type,
   userId,
   patientId,
+  appointment,
+  setIsOpen,
+  noPopover,
 }: {
   type: "create" | "cancel" | "schedule";
   userId: string;
   patientId: string | undefined;
+  appointment?: Appointment;
+  setIsOpen?: (value: boolean) => void;
+  noPopover?: boolean;
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
@@ -46,11 +56,11 @@ const AppointmentForm = ({
   const form = useForm<z.infer<typeof AppointmentFormValidation>>({
     resolver: zodResolver(AppointmentFormValidation),
     defaultValues: {
-      primaryPhysician: "",
-      schedule: new Date(),
-      reason: "",
-      note: "",
-      cancellationReason: "",
+      primaryPhysician: appointment ? appointment.primaryPhysician : "",
+      schedule: appointment ? new Date(appointment.schedule) : new Date(),
+      reason: appointment ? appointment.reason : "",
+      note: appointment ? appointment.note : "",
+      cancellationReason: appointment?.cancellationReason || "",
     },
   });
 
@@ -94,6 +104,23 @@ const AppointmentForm = ({
             `/patients/${userId}/new-appointment/success?appointmentId=${appointment.$id}`,
           );
         }
+      } else {
+        const appointmentToUpdate = {
+          appointmentId: appointment?.$id,
+          appointment: {
+            primaryPhysician: values?.primaryPhysician,
+            schedule: new Date(values?.schedule),
+            status: status as Status,
+            cancellationReason: values?.cancellationReason,
+          },
+        };
+        // @ts-ignore
+        const updatedAppointment = await updateAppointment(appointmentToUpdate);
+
+        if (updatedAppointment) {
+          setIsOpen && setIsOpen(false);
+          form.reset();
+        }
       }
     } catch (error) {
       toast.error("An error occurred while submitting the form.");
@@ -120,18 +147,20 @@ const AppointmentForm = ({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="my-4 space-y-6">
-        <div className="flex items-center justify-between">
-          <section>
-            <h1 className="text-3xl font-semibold tracking-tight">
-              New Appointment
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              Make a new appointment in 10 seconds
-            </p>
-          </section>
+        {type === "create" && (
+          <div className="flex items-center justify-between">
+            <section>
+              <h1 className="text-3xl font-semibold tracking-tight">
+                New Appointment
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Make a new appointment in 10 seconds
+              </p>
+            </section>
 
-          <ModeToggle />
-        </div>
+            <ModeToggle />
+          </div>
+        )}
 
         {type !== "cancel" && (
           <>
@@ -166,45 +195,70 @@ const AppointmentForm = ({
               control={form.control}
               formFieldType={FormFieldType.SKELETON}
               renderSkeleton={(field) => (
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant={"outline"}
-                        className={cn(
-                          "w-full justify-start pl-3 font-normal",
-                          !field.value && "text-muted-foreground",
-                        )}
-                      >
-                        {field.value ? (
-                          format(field.value, "PPP HH:mm")
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0">
-                    <Calendar
-                      mode="single"
-                      selected={field.value}
-                      onSelect={field.onChange}
-                      disabled={(date) =>
-                        date < new Date(new Date().setHours(0, 0, 0, 0))
-                      }
-                      initialFocus
-                      captionLayout="dropdown-buttons"
-                      fromYear={1900}
-                      toYear={new Date().getFullYear() + 1}
-                    />
-                    <div className="flex justify-center border-t border-border p-3">
-                      <TimePickerInput
-                        setDate={field.onChange}
-                        date={field.value}
+                <>
+                  {noPopover ? (
+                    <div className="flex flex-col items-center">
+                      <Calendar
+                        mode="single"
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        disabled={(date) =>
+                          date < new Date(new Date().setHours(0, 0, 0, 0))
+                        }
+                        initialFocus
+                        captionLayout="dropdown-buttons"
+                        fromYear={1900}
+                        toYear={new Date().getFullYear() + 1}
                       />
+                      <div className="flex justify-center">
+                        <TimePickerInput
+                          setDate={field.onChange}
+                          date={field.value}
+                        />
+                      </div>
                     </div>
-                  </PopoverContent>
-                </Popover>
+                  ) : (
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant={"outline"}
+                            className={cn(
+                              "w-full justify-start pl-3 font-normal",
+                              !field.value && "text-muted-foreground",
+                            )}
+                          >
+                            {field.value ? (
+                              format(field.value, "PPP HH:mm")
+                            ) : (
+                              <span>Pick a date</span>
+                            )}
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0">
+                        <Calendar
+                          mode="single"
+                          selected={field.value}
+                          onSelect={field.onChange}
+                          disabled={(date) =>
+                            date < new Date(new Date().setHours(0, 0, 0, 0))
+                          }
+                          initialFocus
+                          captionLayout="dropdown-buttons"
+                          fromYear={1900}
+                          toYear={new Date().getFullYear() + 1}
+                        />
+                        <div className="flex justify-center border-t border-border p-3">
+                          <TimePickerInput
+                            setDate={field.onChange}
+                            date={field.value}
+                          />
+                        </div>
+                      </PopoverContent>
+                    </Popover>
+                  )}
+                </>
               )}
             />
 
