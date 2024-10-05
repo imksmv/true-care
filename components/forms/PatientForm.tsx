@@ -40,7 +40,13 @@ const PatientForm = () => {
 
       const newUser = await createUser(user);
 
-      if (newUser) {
+      if (newUser && newUser.isExistingUser) {
+        if (newUser.hasPatientDocument) {
+          router.push(`/patients/${newUser.$id}/new-appointment`);
+        } else {
+          router.push(`/patients/${newUser.$id}/register?new=true`);
+        }
+      } else if (newUser) {
         router.push(`/patients/${newUser.$id}/register?new=true`);
       }
     } catch (error) {

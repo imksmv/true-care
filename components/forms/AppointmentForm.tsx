@@ -99,7 +99,6 @@ const AppointmentForm = ({
         const appointment = await createAppointment(appointmentData);
 
         if (appointment) {
-          form.reset();
           router.push(
             `/patients/${userId}/new-appointment/success?appointmentId=${appointment.$id}`,
           );
@@ -119,7 +118,6 @@ const AppointmentForm = ({
 
         if (updatedAppointment) {
           setIsOpen && setIsOpen(false);
-          form.reset();
         }
       }
     } catch (error) {

@@ -9,6 +9,8 @@ import { CalendarCheck2, CalendarClock, CalendarX2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+export const fetchCache = "force-no-store";
+
 const ControlPanel = async () => {
   const appointments = await getRecentAppointmentsList();
 

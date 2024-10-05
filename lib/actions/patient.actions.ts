@@ -22,11 +22,19 @@ export const createUser = async (user: CreateUserParams) => {
       user.name,
     );
 
-    return newUser;
+    return { ...newUser, isExistingUser: false, hasPatientDocument: false };
   } catch (error: any) {
     if (error && error.code === 409) {
       const documents = await users.list([Query.equal("email", user.email)]);
-      return documents.users[0];
+      const existingUser = documents.users[0];
+
+      const patient = await getPatient(existingUser.$id);
+
+      return {
+        ...existingUser,
+        isExistingUser: true,
+        hasPatientDocument: !!patient,
+      };
     } else {
       console.log(error);
     }
