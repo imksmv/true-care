@@ -7,17 +7,20 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Appointment } from "@/lib/types/appwrite.types";
+import { Status } from "@/lib/types/index.types";
 import { useState } from "react";
 import AppointmentForm from "./forms/AppointmentForm";
 import { Button } from "./ui/button";
 
 const AppointmentModal = ({
   type,
+  status,
   userId,
   patientId,
   appointment,
 }: {
   type: "schedule" | "cancel";
+  status?: Status;
   userId: string;
   patientId: string;
   appointment?: Appointment;
@@ -30,6 +33,7 @@ const AppointmentModal = ({
         <Button
           size="sm"
           variant={type === "schedule" ? "outline" : "destructive"}
+          disabled={status === "cancelled"}
           className="capitalize"
         >
           {type}

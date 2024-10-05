@@ -71,6 +71,7 @@ export const columns: ColumnDef<Appointment>[] = [
 
           <AppointmentModal
             type="cancel"
+            status={data.status}
             patientId={data.patient.$id}
             userId={data.userId}
             appointment={data}
