@@ -29,7 +29,7 @@ export function DataTable<TValue>({ data, columns }: DataTableProps<TValue>) {
   });
 
   return (
-    <div className="hidden rounded-md border md:block">
+    <div className="hidden w-full rounded-2xl border shadow-md md:block">
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
