@@ -1,15 +1,15 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { ID, Query } from "node-appwrite";
+import { toast } from "sonner";
 import { databases } from "../appwrite.config";
 import { APPOINTMENT_COLLECTION_ID, DATABASE_ID } from "../constans";
+import { Appointment } from "../types/appwrite.types";
 import {
   CreateAppointmentParams,
   UpdateAppointmentParams,
 } from "../types/index.types";
-import { Appointment } from "../types/appwrite.types";
-import { toast } from "sonner";
-import { revalidatePath } from "next/cache";
 
 export const createAppointment = async (
   appointment: CreateAppointmentParams,
@@ -22,6 +22,7 @@ export const createAppointment = async (
       appointment,
     );
 
+    revalidatePath("/control-panel");
     return newAppointment;
   } catch (error) {
     console.log(error);
