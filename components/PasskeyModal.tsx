@@ -83,29 +83,29 @@ const PasskeyModal = () => {
             value={enteredKey}
             onChange={(value) => setEnteredKey(value)}
           >
-            <InputOTPGroup className="flex w-full justify-between">
+            <InputOTPGroup className="flex w-full justify-between px-4">
               <InputOTPSlot
-                className="flex size-16 justify-center gap-4 rounded-lg border text-4xl font-bold"
+                className="flex size-12 justify-center rounded-lg border text-2xl font-bold"
                 index={0}
               />
               <InputOTPSlot
-                className="flex size-16 justify-center gap-4 rounded-lg border text-4xl font-bold"
+                className="flex size-12 justify-center rounded-lg border text-2xl font-bold"
                 index={1}
               />
               <InputOTPSlot
-                className="flex size-16 justify-center gap-4 rounded-lg border text-4xl font-bold"
+                className="flex size-12 justify-center rounded-lg border text-2xl font-bold"
                 index={2}
               />
               <InputOTPSlot
-                className="flex size-16 justify-center gap-4 rounded-lg border text-4xl font-bold"
+                className="flex size-12 justify-center rounded-lg border text-2xl font-bold"
                 index={3}
               />
               <InputOTPSlot
-                className="flex size-16 justify-center gap-4 rounded-lg border text-4xl font-bold"
+                className="flex size-12 justify-center rounded-lg border text-2xl font-bold"
                 index={4}
               />
               <InputOTPSlot
-                className="flex size-16 justify-center gap-4 rounded-lg border text-4xl font-bold"
+                className="flex size-12 justify-center rounded-lg border text-2xl font-bold"
                 index={5}
               />
             </InputOTPGroup>
