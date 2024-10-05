@@ -39,7 +39,7 @@ const AppointmentModal = ({
           {type}
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-sm sm:max-w-[28rem]">
+      <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="capitalize">{type} Appointment</DialogTitle>
           <DialogDescription>
