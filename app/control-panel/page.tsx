@@ -13,8 +13,8 @@ const ControlPanel = async () => {
   const appointments = await getRecentAppointmentsList();
 
   return (
-    <div className="container flex max-w-7xl flex-col space-y-14">
-      <header className="sticky z-20 flex items-center justify-between rounded-b-xl border-x border-b px-12 py-5">
+    <div className="max-w-10xl container flex flex-col space-y-14">
+      <header className="flex w-full items-center justify-between rounded-b-xl px-8 py-3">
         <Link className="cursor-pointer" href="/">
           <div className="flex items-center gap-2">
             <Image
