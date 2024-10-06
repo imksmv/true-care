@@ -4,7 +4,7 @@ import { getAppointment } from "@/lib/actions/appointment.actions";
 import { DOCTORS } from "@/lib/constans";
 import { SearchParamProps } from "@/lib/types/index.types";
 import { SETTINGS } from "@/lib/web.config";
-import { format } from "date-fns";
+import { formatDate } from "date-fns";
 import { Calendar } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -60,7 +60,7 @@ const Success = async ({
 
         <div className="flex items-center gap-2">
           <Calendar size={20} />
-          <p>{format(appointment?.schedule, "PPP HH:mm")}</p>
+          <p>{formatDate(appointment?.schedule, "PPP HH:mm")}</p>
         </div>
       </section>
 
