@@ -4,7 +4,7 @@ import { getAppointment } from "@/lib/actions/appointment.actions";
 import { DOCTORS } from "@/lib/constans";
 import { SearchParamProps } from "@/lib/types/index.types";
 import { SETTINGS } from "@/lib/web.config";
-import { formatDate } from "date-fns";
+import { format } from "date-fns";
 import { Calendar } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,7 +19,7 @@ const Success = async ({
   const doctor = DOCTORS.find(
     (doc) => doc.name === appointment?.primaryPhysician,
   );
-
+  console.log(appointment?.schedule);
   return (
     <div className="flex h-full flex-col items-center justify-center">
       <section className="flex items-center gap-2">
@@ -60,7 +60,7 @@ const Success = async ({
 
         <div className="flex items-center gap-2">
           <Calendar size={20} />
-          <p>{formatDate(appointment?.schedule, "PPP HH:mm")}</p>
+          <p>{format(appointment?.schedule, "PPP HH:mm")}</p>
         </div>
       </section>
 
