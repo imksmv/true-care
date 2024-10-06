@@ -60,7 +60,7 @@ const Success = async ({
 
         <div className="flex items-center gap-2">
           <Calendar size={20} />
-          <p>{format(appointment?.schedule, "PPP HH:mm")}</p>
+          <p>{format(new Date(appointment?.schedule), "PPP HH:mm")}</p>
         </div>
       </section>
 
