@@ -19,7 +19,7 @@ const Success = async ({
   const doctor = DOCTORS.find(
     (doc) => doc.name === appointment?.primaryPhysician,
   );
-  console.log(appointment?.schedule);
+
   return (
     <div className="flex h-full flex-col items-center justify-center">
       <section className="flex items-center gap-2">
